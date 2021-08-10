@@ -21,9 +21,11 @@ class LayoutSelectionView: UIView {
     let layout3image = UIImage(named: "Layout 3.png")
 
     
-    let leftLayoutImageButton = UIButton(type: UIButton.ButtonType.custom)
+    let leftLayoutImageButton = UIButton()
     let middleLayoutImageButton = UIButton()
     let rightLayoutButton = UIButton()
+    
+    let mainPhotoFrameView = MainPhotoFrameView()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,6 +38,7 @@ class LayoutSelectionView: UIView {
     }
 
     func setupView() {
+        print("Paul is here")
         leftLayoutImageButton.setImage(layout1image, for: .normal)
         addSubview(leftLayoutImageButton)
 
@@ -44,10 +47,14 @@ class LayoutSelectionView: UIView {
 
         rightLayoutButton.setImage(layout3image, for: .normal)
         addSubview(rightLayoutButton)
+        
+        mainPhotoFrameView.backgroundColor = .white
+        addSubview(mainPhotoFrameView)
 
-        [leftLayoutImageButton, middleLayoutImageButton, rightLayoutButton].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
-
+        [leftLayoutImageButton, middleLayoutImageButton, rightLayoutButton, mainPhotoFrameView].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        
         NSLayoutConstraint.activate([
+
             middleLayoutImageButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
             middleLayoutImageButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             middleLayoutImageButton.widthAnchor.constraint(equalToConstant: 64),
@@ -57,11 +64,22 @@ class LayoutSelectionView: UIView {
             leftLayoutImageButton.rightAnchor.constraint(equalTo: middleLayoutImageButton.leftAnchor, constant: -32),
             leftLayoutImageButton.widthAnchor.constraint(equalToConstant: 64),
             leftLayoutImageButton.heightAnchor.constraint(equalToConstant: 64),
+        
 
+            
             rightLayoutButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
             rightLayoutButton.leftAnchor.constraint(equalTo: middleLayoutImageButton.rightAnchor, constant: 32),
             rightLayoutButton.widthAnchor.constraint(equalToConstant: 64),
-            rightLayoutButton.heightAnchor.constraint(equalToConstant: 64)
+            rightLayoutButton.heightAnchor.constraint(equalToConstant: 64),
+            
+            mainPhotoFrameView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -200),
+            mainPhotoFrameView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            mainPhotoFrameView.widthAnchor.constraint(equalToConstant: 320),
+            mainPhotoFrameView.heightAnchor.constraint(equalToConstant: 320),
+            
         ])
+
+        
+        
     }
 }

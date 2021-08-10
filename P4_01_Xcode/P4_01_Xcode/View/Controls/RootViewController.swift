@@ -11,6 +11,8 @@ class RootViewController: UIViewController {
 
     let titleLabel = UILabel()
     let layoutSelectionView = LayoutSelectionView()
+    let swipeLabel = UILabel()
+    
     
     override func loadView() {
         super.loadView()
@@ -19,13 +21,20 @@ class RootViewController: UIViewController {
 
         titleLabel.text = "Instagrid"
         titleLabel.textColor = .white
-        titleLabel.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        titleLabel.font = UIFont(name: "ThirstySoftRegular" , size: 30)
         view.addSubview(titleLabel)
+        
+        
 
         layoutSelectionView.rightLayoutButton.addTarget(self, action: #selector(userDidTap), for: .touchUpInside)
         view.addSubview(layoutSelectionView)
+        
+        swipeLabel.text = "Swipe up to share"
+        swipeLabel.textColor = .white
+        swipeLabel.font = UIFont(name: "Delm-Medium" , size: 26)
+        view.addSubview(swipeLabel)
 
-        [titleLabel, layoutSelectionView].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        [titleLabel, layoutSelectionView, swipeLabel].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
 
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
@@ -33,7 +42,13 @@ class RootViewController: UIViewController {
 
             layoutSelectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
             layoutSelectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            layoutSelectionView.rightAnchor.constraint(equalTo: view.rightAnchor)
+            layoutSelectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            
+            swipeLabel.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: 162),
+            swipeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            
+            
         ])
     }
 
