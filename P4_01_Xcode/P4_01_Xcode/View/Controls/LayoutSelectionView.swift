@@ -8,46 +8,60 @@
 import UIKit
 
 class LayoutSelectionView: UIView {
+    /*
+     let img = UIImage(named: "imgname")
+     let myButton = UIButton(type: UIButtonType.custom)
+     myButton.frame = CGRect.init(x: 10, y: 10, width: 100, height: 45)
+     myButton.setImage(img, for: .normal)
+     myButton.addTarget(self, action: #selector(self.buttonClicked(_:)), for: UIControlEvents.touchUpInside)
+     self.view.addSubview(myButton)
+     */
+    let layout1image = UIImage(named: "Layout 1.png")
+    let layout2image = UIImage(named: "Layout 2.png")
+    let layout3image = UIImage(named: "Layout 3.png")
+
     
-    let leftLayoutButton = UIButton()
-    let middleLayoutButton = UIButton()
-    let rigthLayoutButton = UIButton()
-    
-    override init (frame: CGRect) {
+    let leftLayoutImageButton = UIButton(type: UIButton.ButtonType.custom)
+    let middleLayoutImageButton = UIButton()
+    let rightLayoutButton = UIButton()
+
+    override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         setupView()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func setupView() {
-        
-        leftLayoutButton.setImage(UIImage(named: "Layout 1"), for: UIControl.State.normal)
-        middleLayoutButton.setImage(UIImage(named: "Layout 2"), for: UIControl.State.normal)
-        rigthLayoutButton.setImage(UIImage(named: "Layout 3"), for: UIControl.State.normal)
-        
-        [leftLayoutButton, middleLayoutButton, leftLayoutButton].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
-        
+        leftLayoutImageButton.setImage(layout1image, for: .normal)
+        addSubview(leftLayoutImageButton)
+
+        middleLayoutImageButton.setImage(layout2image, for: .normal)
+        addSubview(middleLayoutImageButton)
+
+        rightLayoutButton.setImage(layout3image, for: .normal)
+        addSubview(rightLayoutButton)
+
+        [leftLayoutImageButton, middleLayoutImageButton, rightLayoutButton].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+
         NSLayoutConstraint.activate([
-            middleLayoutButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -34),
-            middleLayoutButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            middleLayoutButton.widthAnchor.constraint(equalToConstant: 64),
-            middleLayoutButton.heightAnchor.constraint(equalToConstant: 64),
-            
-            rigthLayoutButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -34),
-            rigthLayoutButton.leftAnchor.constraint(equalTo: middleLayoutButton.rightAnchor, constant: 32),
-            rigthLayoutButton.widthAnchor.constraint(equalToConstant: 64),
-            rigthLayoutButton.heightAnchor.constraint(equalToConstant: 64),
-            
-            leftLayoutButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -34),
-            leftLayoutButton.rightAnchor.constraint(equalTo: middleLayoutButton.leftAnchor, constant: 34),
-            leftLayoutButton.widthAnchor.constraint(equalToConstant: 64),
-            leftLayoutButton.heightAnchor.constraint(equalToConstant: 64),
-            
-            
+            middleLayoutImageButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
+            middleLayoutImageButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            middleLayoutImageButton.widthAnchor.constraint(equalToConstant: 64),
+            middleLayoutImageButton.heightAnchor.constraint(equalToConstant: 64),
+
+            leftLayoutImageButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
+            leftLayoutImageButton.rightAnchor.constraint(equalTo: middleLayoutImageButton.leftAnchor, constant: -32),
+            leftLayoutImageButton.widthAnchor.constraint(equalToConstant: 64),
+            leftLayoutImageButton.heightAnchor.constraint(equalToConstant: 64),
+
+            rightLayoutButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
+            rightLayoutButton.leftAnchor.constraint(equalTo: middleLayoutImageButton.rightAnchor, constant: 32),
+            rightLayoutButton.widthAnchor.constraint(equalToConstant: 64),
+            rightLayoutButton.heightAnchor.constraint(equalToConstant: 64)
         ])
     }
 }
