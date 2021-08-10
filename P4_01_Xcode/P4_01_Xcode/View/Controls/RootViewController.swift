@@ -17,7 +17,8 @@ class RootViewController: UIViewController {
     override func loadView() {
         super.loadView()
 
-        view.backgroundColor = .systemTeal
+        view.backgroundColor = #colorLiteral(red: 0.6850972772, green: 0.8479481339, blue: 0.9051222205, alpha: 1)
+            
 
         titleLabel.text = "Instagrid"
         titleLabel.textColor = .white
