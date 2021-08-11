@@ -8,14 +8,7 @@
 import UIKit
 
 class LayoutSelectionView: UIView {
-    /*
-     let img = UIImage(named: "imgname")
-     let myButton = UIButton(type: UIButtonType.custom)
-     myButton.frame = CGRect.init(x: 10, y: 10, width: 100, height: 45)
-     myButton.setImage(img, for: .normal)
-     myButton.addTarget(self, action: #selector(self.buttonClicked(_:)), for: UIControlEvents.touchUpInside)
-     self.view.addSubview(myButton)
-     */
+  
     let layout1image = UIImage(named: "Layout 1.png")
     let layout2image = UIImage(named: "Layout 2.png")
     let layout3image = UIImage(named: "Layout 3.png")

@@ -7,17 +7,7 @@
 
 
 
-/*
- let imageName = "yourImage.png"
- let image = UIImage(named: imageName)
- let imageView = UIImageView(image: image!)
 
- Finally you'll need to give imageView a frame and add it your view for it to be visible:
-
- imageView.frame = CGRect(x: 0, y: 0, width: 100, height: 200)
- view.addSubview(imageView)
-
- */
 import UIKit
 
 class MainPhotoFrameView: UIView {
