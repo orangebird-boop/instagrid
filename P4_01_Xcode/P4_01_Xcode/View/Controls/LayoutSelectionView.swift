@@ -32,12 +32,25 @@ class LayoutSelectionView: UIView {
 
     func setupView() {
         print("Paul is here")
+        
+        leftLayoutImageButton.contentMode = .scaleAspectFill
+        leftLayoutImageButton.imageEdgeInsets = UIEdgeInsets.zero
+        leftLayoutImageButton.contentVerticalAlignment = .fill
+        leftLayoutImageButton.contentHorizontalAlignment = .fill
         leftLayoutImageButton.setImage(layout1image, for: .normal)
         addSubview(leftLayoutImageButton)
-
+        
+        middleLayoutImageButton.contentMode = .scaleAspectFill
+        middleLayoutImageButton.imageEdgeInsets = UIEdgeInsets.zero
+        middleLayoutImageButton.contentVerticalAlignment = .fill
+        middleLayoutImageButton.contentHorizontalAlignment = .fill
         middleLayoutImageButton.setImage(layout2image, for: .normal)
         addSubview(middleLayoutImageButton)
 
+        rightLayoutButton.contentMode = .scaleAspectFill
+        rightLayoutButton.imageEdgeInsets = UIEdgeInsets.zero
+        rightLayoutButton.contentVerticalAlignment = .fill
+        rightLayoutButton.contentHorizontalAlignment = .fill
         rightLayoutButton.setImage(layout3image, for: .normal)
         addSubview(rightLayoutButton)
         
