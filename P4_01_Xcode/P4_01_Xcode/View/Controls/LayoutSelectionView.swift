@@ -14,8 +14,8 @@ class LayoutSelectionView: UIView {
     let layout3image = UIImage(named: "Layout 3.png")
 
     
-    let leftLayoutImageButton = UIButton()
-    let middleLayoutImageButton = UIButton()
+    let leftLayoutButton = UIButton()
+    let middleLayoutButton = UIButton()
     let rightLayoutButton = UIButton()
     
     let mainPhotoFrameView = MainPhotoFrameView()
@@ -33,19 +33,19 @@ class LayoutSelectionView: UIView {
     func setupView() {
         print("Paul is here")
         
-        leftLayoutImageButton.contentMode = .scaleAspectFill
-        leftLayoutImageButton.imageEdgeInsets = UIEdgeInsets.zero
-        leftLayoutImageButton.contentVerticalAlignment = .fill
-        leftLayoutImageButton.contentHorizontalAlignment = .fill
-        leftLayoutImageButton.setImage(layout1image, for: .normal)
-        addSubview(leftLayoutImageButton)
+        leftLayoutButton.contentMode = .scaleAspectFill
+        leftLayoutButton.imageEdgeInsets = UIEdgeInsets.zero
+        leftLayoutButton.contentVerticalAlignment = .fill
+        leftLayoutButton.contentHorizontalAlignment = .fill
+        leftLayoutButton.setImage(layout1image, for: .normal)
+        addSubview(leftLayoutButton)
         
-        middleLayoutImageButton.contentMode = .scaleAspectFill
-        middleLayoutImageButton.imageEdgeInsets = UIEdgeInsets.zero
-        middleLayoutImageButton.contentVerticalAlignment = .fill
-        middleLayoutImageButton.contentHorizontalAlignment = .fill
-        middleLayoutImageButton.setImage(layout2image, for: .normal)
-        addSubview(middleLayoutImageButton)
+        middleLayoutButton.contentMode = .scaleAspectFill
+        middleLayoutButton.imageEdgeInsets = UIEdgeInsets.zero
+        middleLayoutButton.contentVerticalAlignment = .fill
+        middleLayoutButton.contentHorizontalAlignment = .fill
+        middleLayoutButton.setImage(layout2image, for: .normal)
+        addSubview(middleLayoutButton)
 
         rightLayoutButton.contentMode = .scaleAspectFill
         rightLayoutButton.imageEdgeInsets = UIEdgeInsets.zero
@@ -57,24 +57,24 @@ class LayoutSelectionView: UIView {
         mainPhotoFrameView.backgroundColor = .white
         addSubview(mainPhotoFrameView)
 
-        [leftLayoutImageButton, middleLayoutImageButton, rightLayoutButton, mainPhotoFrameView].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        [leftLayoutButton, middleLayoutButton, rightLayoutButton, mainPhotoFrameView].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         
         NSLayoutConstraint.activate([
 
-            middleLayoutImageButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
-            middleLayoutImageButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            middleLayoutImageButton.widthAnchor.constraint(equalToConstant: 64),
-            middleLayoutImageButton.heightAnchor.constraint(equalToConstant: 64),
+            middleLayoutButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
+            middleLayoutButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            middleLayoutButton.widthAnchor.constraint(equalToConstant: 64),
+            middleLayoutButton.heightAnchor.constraint(equalToConstant: 64),
 
-            leftLayoutImageButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
-            leftLayoutImageButton.rightAnchor.constraint(equalTo: middleLayoutImageButton.leftAnchor, constant: -32),
-            leftLayoutImageButton.widthAnchor.constraint(equalToConstant: 64),
-            leftLayoutImageButton.heightAnchor.constraint(equalToConstant: 64),
+            leftLayoutButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
+            leftLayoutButton.rightAnchor.constraint(equalTo: middleLayoutButton.leftAnchor, constant: -32),
+            leftLayoutButton.widthAnchor.constraint(equalToConstant: 64),
+            leftLayoutButton.heightAnchor.constraint(equalToConstant: 64),
         
 
             
             rightLayoutButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
-            rightLayoutButton.leftAnchor.constraint(equalTo: middleLayoutImageButton.rightAnchor, constant: 32),
+            rightLayoutButton.leftAnchor.constraint(equalTo: middleLayoutButton.rightAnchor, constant: 32),
             rightLayoutButton.widthAnchor.constraint(equalToConstant: 64),
             rightLayoutButton.heightAnchor.constraint(equalToConstant: 64),
             

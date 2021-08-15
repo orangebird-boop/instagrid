@@ -55,8 +55,7 @@ class RootViewController: UIViewController {
 
     @objc
     func userDidTap() {
-        //change state of mainPhotoFrameView
-        //change bacground image on button
+        
         print("Button was tapped !")
     }
     
