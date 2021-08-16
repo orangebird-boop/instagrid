@@ -6,7 +6,7 @@
 //
 
 
-
+/*
 
 import UIKit
 
@@ -219,3 +219,4 @@ class MainPhotoFrameView: UIView {
 
 
 }
+*/

@@ -4,7 +4,7 @@
 //
 //  Created by Nora Lilla Matyassi on 05/08/2021.
 //
-
+/*
 import UIKit
 
 class LayoutSelectionView: UIView {
@@ -29,6 +29,7 @@ class LayoutSelectionView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    //rightLayoutButton.addTarget(self, action: #selector(userDidTap), for: .touchUpInside)
 
     func setupView() {
         print("Paul is here")
@@ -52,6 +53,9 @@ class LayoutSelectionView: UIView {
         rightLayoutButton.contentVerticalAlignment = .fill
         rightLayoutButton.contentHorizontalAlignment = .fill
         rightLayoutButton.setImage(layout3image, for: .normal)
+
+        rightLayoutButton.addTarget(self, action: #selector(userDidTap), for: .touchUpInside)
+        //rightLayoutButton.backgroundColor = .red
         addSubview(rightLayoutButton)
         
         mainPhotoFrameView.backgroundColor = .white
@@ -88,4 +92,11 @@ class LayoutSelectionView: UIView {
         
         
     }
+    
+    @objc func userDidTap() {
+        rightLayoutButton.backgroundColor = .blue
+        print("Button was tapped !")
+    }
+    
 }
+*/
