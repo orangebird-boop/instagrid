@@ -197,7 +197,7 @@ class RootViewController: UIViewController {
         chosenLayout = sender
         
             if chosenLayout.tag == 1 {
-                
+                layoutImage.removeFromSuperview()
                 leftLayoutButton.setImage(selectedLayoutImage, for: .normal)
                 setupLayout1View()
                 middleLayoutButton.setImage(layout2image, for: .normal)
