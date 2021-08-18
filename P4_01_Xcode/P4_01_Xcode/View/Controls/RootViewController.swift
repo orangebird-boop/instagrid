@@ -172,19 +172,21 @@ class RootViewController: UIViewController {
     @objc func userDidTap(_ sender: UIButton) {
         resetLayoutButtonImages()
        
+        
         var layoutView : UIView?
         switch sender.tag {
         case 1:
-            
             leftLayoutButton.setImage(selectedLayoutImage, for: .normal)
             layoutView = setupLayout1View()
         
         case 2:
             middleLayoutButton.setImage(selectedLayoutImage, for: .normal)
             layoutView = setupLayout2View()
+            
         case 3:
             rightLayoutButton.setImage(selectedLayoutImage, for: .normal)
             layoutView = setupLayout3View()
+            
         default:
             fatalError("This is bad")
         }
@@ -216,9 +218,9 @@ class RootViewController: UIViewController {
     
   //BIG LAYOUTS //
     func resetLayoutButtonImages() {
-        if leftLayoutButton.isSelected {
-            print("is selected")
-        }
+        leftLayoutButton.setImage(layout1image, for: .normal)
+        middleLayoutButton.setImage(layout2image, for: .normal)
+        rightLayoutButton.setImage(layout3image, for: .normal)
     }
     
     func setupLayout1View() -> UIView {
