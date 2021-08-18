@@ -60,6 +60,7 @@ class RootViewController: UIViewController {
         swipeLabel.text = "Swipe up to share"
         swipeLabel.textColor = .white
         swipeLabel.font = UIFont(name: "Delm-Medium" , size: 26)
+        
         view.addSubview(swipeLabel)
         
         
@@ -94,44 +95,6 @@ class RootViewController: UIViewController {
        
   
         
-      
-        /*
-        button1.setImage(buttonImage, for: .normal)
-        button1.contentMode = .scaleAspectFill
-        button1.imageEdgeInsets = UIEdgeInsets.zero
-        button1.contentVerticalAlignment = .fill
-        button1.contentHorizontalAlignment = .fill
-        button1.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
-     
-
-        
-        button2.setImage(buttonImage, for: .normal)
-        button2.contentMode = .scaleAspectFill
-        button2.imageEdgeInsets = UIEdgeInsets.zero
-        button2.contentVerticalAlignment = .fill
-        button2.contentHorizontalAlignment = .fill
-        button2.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
-  //      smallFrame2.addSubview(button2)
-        
-        
-   
-        
-        button3.setImage(buttonImage, for: .normal)
-        button3.contentMode = .scaleAspectFill
-        button3.imageEdgeInsets = UIEdgeInsets.zero
-        button3.contentVerticalAlignment = .fill
-        button3.contentHorizontalAlignment = .fill
-        button3.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
-  //      bigFrame.addSubview(button3)
-        
-        button4.setImage(buttonImage, for: .normal)
-        button4.contentMode = .scaleAspectFill
-        button4.imageEdgeInsets = UIEdgeInsets.zero
-        button4.contentVerticalAlignment = .fill
-        button4.contentHorizontalAlignment = .fill
-        button4.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
-      
-         */
         [titleLabel , swipeLabel, rightLayoutButton, leftLayoutButton, middleLayoutButton, layoutContainer].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
       
         NSLayoutConstraint.activate([
@@ -172,10 +135,11 @@ class RootViewController: UIViewController {
     @objc func userDidTap(_ sender: UIButton) {
         resetLayoutButtonImages()
        
-        
+        print(sender.tag)
         var layoutView : UIView?
         switch sender.tag {
         case 1:
+            print("case 1")
             leftLayoutButton.setImage(selectedLayoutImage, for: .normal)
             layoutView = setupLayout1View()
         
@@ -192,8 +156,12 @@ class RootViewController: UIViewController {
         }
         
         if let layoutView = layoutView {
+            print("cast layoutView")
             if !layoutContainer.subviews.isEmpty {
+                print("it got in the if statement")
                 layoutContainer.subviews.forEach { $0.removeFromSuperview() }
+            }else{
+                print("it failed")
             }
             
             layoutContainer.addSubview(layoutView)
@@ -225,6 +193,7 @@ class RootViewController: UIViewController {
     
     func setupLayout1View() -> UIView {
       
+        print("setup layout 1 view")
        
         let layoutContainer = UIView()
         layoutContainer.backgroundColor = UIColor(red: 15/255, green: 102/255, blue: 152/255, alpha: 1)
@@ -239,6 +208,7 @@ class RootViewController: UIViewController {
         rightBottomFrame.backgroundColor = .white
         
         
+        
         let topImageButton = UIButton(type: .custom)
         topImageButton.setImage(plusImageForButton, for: .normal)
         topImageButton.contentMode = .scaleAspectFill
@@ -246,6 +216,7 @@ class RootViewController: UIViewController {
         topImageButton.contentVerticalAlignment = .fill
         topImageButton.contentHorizontalAlignment = .fill
         topImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
+        
         
         let rightBottomImageButton = UIButton(type: .custom)
         rightBottomImageButton.setImage(plusImageForButton, for: .normal)
@@ -263,12 +234,13 @@ class RootViewController: UIViewController {
         leftBottomImageButton.contentHorizontalAlignment = .fill
         leftBottomImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
         
+       // topFrame.addSubview(topImageButton)
+        leftBottomFrame.addSubview(leftBottomImageButton)
+        rightBottomFrame.addSubview(rightBottomImageButton)
         layoutContainer.addSubview(topFrame)
         layoutContainer.addSubview(leftBottomFrame)
         layoutContainer.addSubview(rightBottomFrame)
-        topFrame.addSubview(topImageButton)
-        leftBottomFrame.addSubview(leftBottomImageButton)
-        rightBottomFrame.addSubview(rightBottomImageButton)
+        layoutContainer.addSubview(topImageButton)
         
         
         
@@ -516,8 +488,8 @@ class RootViewController: UIViewController {
     
     
      
-    @objc func pickImage(_ sender: UIButton) {
-      print("the plus was clicked")
+    @objc func pickImage(_ sender: Any) {
+   print( "the plus was clicked")
         
     }
     
