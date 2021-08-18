@@ -36,6 +36,9 @@ class RootViewController: UIViewController {
     
     let plusImageForButton = UIImage(named: "Plus.png")
     
+    let imagePicker = UIImagePickerController()
+    
+    var lastUsedTag = 0
     
     override func loadView() {
         super.loadView()
@@ -215,6 +218,7 @@ class RootViewController: UIViewController {
         topImageButton.imageEdgeInsets = UIEdgeInsets.zero
         topImageButton.contentVerticalAlignment = .fill
         topImageButton.contentHorizontalAlignment = .fill
+        topImageButton.tag = 4
         topImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
         
         
@@ -224,6 +228,7 @@ class RootViewController: UIViewController {
         rightBottomImageButton.imageEdgeInsets = UIEdgeInsets.zero
         rightBottomImageButton.contentVerticalAlignment = .fill
         rightBottomImageButton.contentHorizontalAlignment = .fill
+        rightBottomImageButton.tag = 5
         rightBottomImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
         
         let leftBottomImageButton = UIButton(type: .custom)
@@ -232,15 +237,17 @@ class RootViewController: UIViewController {
         leftBottomImageButton.imageEdgeInsets = UIEdgeInsets.zero
         leftBottomImageButton.contentVerticalAlignment = .fill
         leftBottomImageButton.contentHorizontalAlignment = .fill
+        leftBottomImageButton.tag = 6
         leftBottomImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
         
        // topFrame.addSubview(topImageButton)
-        leftBottomFrame.addSubview(leftBottomImageButton)
-        rightBottomFrame.addSubview(rightBottomImageButton)
+        
         layoutContainer.addSubview(topFrame)
         layoutContainer.addSubview(leftBottomFrame)
         layoutContainer.addSubview(rightBottomFrame)
         layoutContainer.addSubview(topImageButton)
+        layoutContainer.addSubview(leftBottomImageButton)
+        layoutContainer.addSubview(rightBottomImageButton)
         
         
         
@@ -307,6 +314,7 @@ class RootViewController: UIViewController {
         bottomImageButton.imageEdgeInsets = UIEdgeInsets.zero
         bottomImageButton.contentVerticalAlignment = .fill
         bottomImageButton.contentHorizontalAlignment = .fill
+        bottomImageButton.tag = 7
         bottomImageButton.addTarget(self, action: #selector(RootViewController.pickImage), for: .touchUpInside)
         
         let rightTopImageButton = UIButton(type: .custom)
@@ -315,6 +323,7 @@ class RootViewController: UIViewController {
         rightTopImageButton.imageEdgeInsets = UIEdgeInsets.zero
         rightTopImageButton.contentVerticalAlignment = .fill
         rightTopImageButton.contentHorizontalAlignment = .fill
+        rightTopImageButton.tag = 8
         rightTopImageButton.addTarget(self, action: #selector(RootViewController.pickImage), for: .touchUpInside)
         
         let leftTopImageButton = UIButton(type: .custom)
@@ -323,14 +332,15 @@ class RootViewController: UIViewController {
         leftTopImageButton.imageEdgeInsets = UIEdgeInsets.zero
         leftTopImageButton.contentVerticalAlignment = .fill
         leftTopImageButton.contentHorizontalAlignment = .fill
+        leftTopImageButton.tag = 9
         leftTopImageButton.addTarget(self, action: #selector(RootViewController.pickImage), for: .touchUpInside)
         
         layoutContainer.addSubview(bottomFrame)
         layoutContainer.addSubview(leftTopFrame)
         layoutContainer.addSubview(rightTopFrame)
-        bottomFrame.addSubview(bottomImageButton)
-        leftTopFrame.addSubview(leftTopImageButton)
-        rightTopFrame.addSubview(rightTopImageButton)
+        layoutContainer.addSubview(bottomImageButton)
+        layoutContainer.addSubview(leftTopImageButton)
+        layoutContainer.addSubview(rightTopImageButton)
         
         
         
@@ -399,6 +409,7 @@ class RootViewController: UIViewController {
         rightTopImageButton.imageEdgeInsets = UIEdgeInsets.zero
         rightTopImageButton.contentVerticalAlignment = .fill
         rightTopImageButton.contentHorizontalAlignment = .fill
+        rightTopImageButton.tag = 10
         rightTopImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
         
         let leftTopImageButton = UIButton(type: .custom)
@@ -407,6 +418,7 @@ class RootViewController: UIViewController {
         leftTopImageButton.imageEdgeInsets = UIEdgeInsets.zero
         leftTopImageButton.contentVerticalAlignment = .fill
         leftTopImageButton.contentHorizontalAlignment = .fill
+        leftTopImageButton.tag = 11
         leftTopImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
         
         let rightBottomImageButton = UIButton(type: .custom)
@@ -415,6 +427,7 @@ class RootViewController: UIViewController {
         rightBottomImageButton.imageEdgeInsets = UIEdgeInsets.zero
         rightBottomImageButton.contentVerticalAlignment = .fill
         rightBottomImageButton.contentHorizontalAlignment = .fill
+        rightBottomImageButton.tag = 12
         rightBottomImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
         
         let leftBottomImageButton = UIButton(type: .custom)
@@ -423,6 +436,7 @@ class RootViewController: UIViewController {
         leftBottomImageButton.imageEdgeInsets = UIEdgeInsets.zero
         leftBottomImageButton.contentVerticalAlignment = .fill
         leftBottomImageButton.contentHorizontalAlignment = .fill
+        leftBottomImageButton.tag = 13
         leftBottomImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
         
         layoutContainer.addSubview(rightBottomFrame)
@@ -430,10 +444,10 @@ class RootViewController: UIViewController {
         layoutContainer.addSubview(leftTopFrame)
         layoutContainer.addSubview(rightTopFrame)
         
-        leftBottomFrame.addSubview(leftBottomImageButton)
-        rightBottomFrame.addSubview(rightBottomImageButton)
-        leftTopFrame.addSubview(leftTopImageButton)
-        rightTopFrame.addSubview(rightTopImageButton)
+        layoutContainer.addSubview(leftBottomImageButton)
+        layoutContainer.addSubview(rightBottomImageButton)
+        layoutContainer.addSubview(leftTopImageButton)
+        layoutContainer.addSubview(rightTopImageButton)
         
         [leftTopFrame, rightTopFrame, leftBottomFrame, rightBottomFrame, rightTopImageButton, leftTopImageButton, rightBottomImageButton, leftBottomImageButton].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         
@@ -488,13 +502,48 @@ class RootViewController: UIViewController {
     
     
      
-    @objc func pickImage(_ sender: Any) {
-   print( "the plus was clicked")
-        
+    @objc func pickImage(_ sender: AnyObject) {
+        print( "the plus was clicked")
+        present(imagePicker, animated: true, completion: nil)
+        lastUsedTag = sender.tag
     }
+    
+
     
      
 }
 
+extension RootViewController: UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        guard let selectedImage = [] as? UIImage else{
+        return
+        }
+        
+        if let matchingFrame = view.subviews.first(where: { $0.tag == lastUsedTag }), let buttonView = matchingFrame as? UIButton {
+            
+            buttonView.setImage(selectedImage, for: .normal)
+        
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
+    }
+}
+/*
+func displayImagePickerButtonTapped(_ sender:UIButton!) {
+    
+    let myPickerController = UIImagePickerController()
+    myPickerController.delegate = self;
+    myPickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
+    
+    self.present(myPickerController, animated: true, completion: nil)
+    
+}
 
-
+func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
+{
+    myImageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+    myImageView.backgroundColor = UIColor.clear
+    myImageView.contentMode = UIViewContentMode.scaleAspectFit
+    self.dismiss(animated: true, completion: nil)
+}
+*/
