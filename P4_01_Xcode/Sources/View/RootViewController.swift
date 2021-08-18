@@ -35,7 +35,11 @@ class RootViewController: UIViewController {
     let layoutContainer = UIView()
     
     let plusImageForButton = UIImage(named: "Plus.png")
-    
+
+
+    var lastTappedButton: UIButton?
+
+    let imagePicker = UIImagePickerController()
     
     
     var lastUsedTag = 0
@@ -139,26 +143,31 @@ class RootViewController: UIViewController {
         resetLayoutButtonImages()
        
         print(sender.tag)
-        var layoutView : UIView?
+        var finalLayoutView : UIView?
         switch sender.tag {
         case 1:
             print("case 1")
             leftLayoutButton.setImage(selectedLayoutImage, for: .normal)
-            layoutView = setupLayout1View()
+            finalLayoutView = setupLayout1View()
         
         case 2:
             middleLayoutButton.setImage(selectedLayoutImage, for: .normal)
-            layoutView = setupLayout2View()
+            let layoutView = MiddleLayoutView()
+            layoutView.leftTopImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
+            layoutView.rightTopImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
+            layoutView.bottomImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
+
+            finalLayoutView = layoutView
             
         case 3:
             rightLayoutButton.setImage(selectedLayoutImage, for: .normal)
-            layoutView = setupLayout3View()
+            finalLayoutView = setupLayout3View()
             
         default:
             fatalError("This is bad")
         }
         
-        if let layoutView = layoutView {
+        if let layoutView = finalLayoutView {
             print("cast layoutView")
             if !layoutContainer.subviews.isEmpty {
                 print("it got in the if statement")
@@ -298,99 +307,6 @@ class RootViewController: UIViewController {
         return layoutContainer
         
     }
-    
-    func setupLayout2View() -> UIView {
-        
-        
-        let layoutContainer = UIView()
-        layoutContainer.backgroundColor = UIColor(red: 15/255, green: 102/255, blue: 152/255, alpha: 1)
-        
-        let bottomFrame = UIImageView()
-        bottomFrame.backgroundColor = .white
-        
-        let leftTopFrame = UIImageView()
-        leftTopFrame.backgroundColor = .white
-        
-        let rightTopFrame = UIImageView()
-        rightTopFrame.backgroundColor = .white
-        
-        
-        let bottomImageButton = UIButton(type: .custom)
-        bottomImageButton.setImage(plusImageForButton, for: .normal)
-        bottomImageButton.contentMode = .scaleAspectFill
-        bottomImageButton.imageEdgeInsets = UIEdgeInsets.zero
-        bottomImageButton.contentVerticalAlignment = .fill
-        bottomImageButton.contentHorizontalAlignment = .fill
-        bottomImageButton.tag = 7
-        bottomImageButton.addTarget(self, action: #selector(RootViewController.pickImage), for: .touchUpInside)
-        
-        let rightTopImageButton = UIButton(type: .custom)
-        rightTopImageButton.setImage(plusImageForButton, for: .normal)
-        rightTopImageButton.contentMode = .scaleAspectFill
-        rightTopImageButton.imageEdgeInsets = UIEdgeInsets.zero
-        rightTopImageButton.contentVerticalAlignment = .fill
-        rightTopImageButton.contentHorizontalAlignment = .fill
-        rightTopImageButton.tag = 8
-        rightTopImageButton.addTarget(self, action: #selector(RootViewController.pickImage), for: .touchUpInside)
-        
-        let leftTopImageButton = UIButton(type: .custom)
-        leftTopImageButton.setImage(plusImageForButton, for: .normal)
-        leftTopImageButton.contentMode = .scaleAspectFill
-        leftTopImageButton.imageEdgeInsets = UIEdgeInsets.zero
-        leftTopImageButton.contentVerticalAlignment = .fill
-        leftTopImageButton.contentHorizontalAlignment = .fill
-        leftTopImageButton.tag = 9
-        leftTopImageButton.addTarget(self, action: #selector(RootViewController.pickImage), for: .touchUpInside)
-        
-        layoutContainer.addSubview(bottomFrame)
-        layoutContainer.addSubview(leftTopFrame)
-        layoutContainer.addSubview(rightTopFrame)
-        layoutContainer.addSubview(bottomImageButton)
-        layoutContainer.addSubview(leftTopImageButton)
-        layoutContainer.addSubview(rightTopImageButton)
-        
-        
-        
-        [bottomFrame, leftTopFrame, rightTopFrame, bottomImageButton, leftTopImageButton, rightTopImageButton ].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
-        
-        
-        NSLayoutConstraint.activate([
-            
-            
-            leftTopFrame.topAnchor.constraint(equalTo: layoutContainer.topAnchor, constant: 10),
-            leftTopFrame.leftAnchor.constraint(equalTo: layoutContainer.leftAnchor, constant: 10),
-            leftTopFrame.heightAnchor.constraint(equalToConstant: 145),
-            leftTopFrame.widthAnchor.constraint(equalToConstant: 145),
-            
-            rightTopFrame.topAnchor.constraint(equalTo: layoutContainer.topAnchor, constant: 10),
-            rightTopFrame.leftAnchor.constraint(equalTo: leftTopFrame.leftAnchor, constant: 155),
-            rightTopFrame.heightAnchor.constraint(equalToConstant: 145),
-            rightTopFrame.widthAnchor.constraint(equalToConstant: 145),
-            
-            bottomFrame.bottomAnchor.constraint(equalTo: layoutContainer.bottomAnchor, constant: -10),
-            bottomFrame.leftAnchor.constraint(equalTo: layoutContainer.leftAnchor, constant: 10),
-            bottomFrame.heightAnchor.constraint(equalToConstant: 145),
-            bottomFrame.widthAnchor.constraint(equalToConstant: 300),
-            
-            rightTopImageButton.centerXAnchor.constraint(equalTo: rightTopFrame.centerXAnchor),
-            rightTopImageButton.centerYAnchor.constraint(equalTo: rightTopFrame.centerYAnchor),
-            rightTopImageButton.heightAnchor.constraint(equalToConstant: 45),
-            rightTopImageButton.widthAnchor.constraint(equalToConstant: 45),
-            
-            leftTopImageButton.centerXAnchor.constraint(equalTo: leftTopFrame.centerXAnchor),
-            leftTopImageButton.centerYAnchor.constraint(equalTo: leftTopFrame.centerYAnchor),
-            leftTopImageButton.heightAnchor.constraint(equalToConstant: 45),
-            leftTopImageButton.widthAnchor.constraint(equalToConstant: 45),
-            
-            bottomImageButton.centerXAnchor.constraint(equalTo: bottomFrame.centerXAnchor),
-            bottomImageButton.centerYAnchor.constraint(equalTo: bottomFrame.centerYAnchor),
-            bottomImageButton.heightAnchor.constraint(equalToConstant: 45),
-            bottomImageButton.widthAnchor.constraint(equalToConstant: 45),
-                                        
-                                        ])
-        return layoutContainer
-        
-    }
    
     func setupLayout3View()-> UIView {
    
@@ -511,33 +427,35 @@ class RootViewController: UIViewController {
      
     @objc func pickImage(_ sender: AnyObject) {
         print( "the plus was clicked")
-        let imagePicker = UIImagePickerController()
-        present(imagePicker, animated: true, completion: nil)
-        lastUsedTag = sender.tag
-    }
-    
 
-    
-     
+        imagePicker.delegate = self
+
+        present(imagePicker, animated: true, completion: nil)
+
+        if let tappedImageButton = sender as? UIButton {
+            lastTappedButton = tappedImageButton
+        }
+    }
 }
 
-extension RootViewController: UIImagePickerControllerDelegate {
+extension RootViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let selectedImage = [UIImagePickerController.InfoKey.originalImage] as? UIImage else{
+        guard let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else{
             return
         }
         
-        if let matchingFrame = view.subviews.first(where: { $0.tag == lastUsedTag }), let buttonView = matchingFrame as? UIButton {
+        if let lastTappedButton = lastTappedButton {
             print("the image is saved")
-            buttonView.setImage(selectedImage, for: .normal)
-            buttonView.contentMode = .scaleAspectFill
-            buttonView.imageEdgeInsets = UIEdgeInsets.zero
-            buttonView.contentVerticalAlignment = .fill
-            buttonView.contentHorizontalAlignment = .fill
-        
+            lastTappedButton.setImage(selectedImage, for: .normal)
+            lastTappedButton.contentMode = .scaleAspectFill
+            lastTappedButton.imageEdgeInsets = UIEdgeInsets.zero
+            lastTappedButton.contentVerticalAlignment = .fill
+            lastTappedButton.contentHorizontalAlignment = .fill
+
+            self.lastTappedButton = nil
         }
         
         picker.dismiss(animated: true, completion: nil)
     }
 }
-
