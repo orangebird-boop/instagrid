@@ -36,7 +36,7 @@ class RootViewController: UIViewController {
     
     let plusImageForButton = UIImage(named: "Plus.png")
     
-    let imagePicker = UIImagePickerController()
+    
     
     var lastUsedTag = 0
     
@@ -183,8 +183,15 @@ class RootViewController: UIViewController {
         print("Layout button was tapped !")
     }
     
-    func userDidSwipe() {
-        //do something
+    func createSwipe() {
+        let swipeLeft = UISwipeGestureRecognizer()
+        swipeLeft.addTarget(self, action: #selector(userDidSwipe))
+        swipeLeft.direction = .left
+        
+        }
+    
+    @objc func userDidSwipe() {
+        print("save image")
     }
     
   //BIG LAYOUTS //
@@ -504,6 +511,7 @@ class RootViewController: UIViewController {
      
     @objc func pickImage(_ sender: AnyObject) {
         print( "the plus was clicked")
+        let imagePicker = UIImagePickerController()
         present(imagePicker, animated: true, completion: nil)
         lastUsedTag = sender.tag
     }
@@ -515,35 +523,21 @@ class RootViewController: UIViewController {
 
 extension RootViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        guard let selectedImage = [] as? UIImage else{
-        return
+        guard let selectedImage = [UIImagePickerController.InfoKey.originalImage] as? UIImage else{
+            return
         }
         
         if let matchingFrame = view.subviews.first(where: { $0.tag == lastUsedTag }), let buttonView = matchingFrame as? UIButton {
-            
+            print("the image is saved")
             buttonView.setImage(selectedImage, for: .normal)
+            buttonView.contentMode = .scaleAspectFill
+            buttonView.imageEdgeInsets = UIEdgeInsets.zero
+            buttonView.contentVerticalAlignment = .fill
+            buttonView.contentHorizontalAlignment = .fill
         
         }
         
         picker.dismiss(animated: true, completion: nil)
     }
 }
-/*
-func displayImagePickerButtonTapped(_ sender:UIButton!) {
-    
-    let myPickerController = UIImagePickerController()
-    myPickerController.delegate = self;
-    myPickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
-    
-    self.present(myPickerController, animated: true, completion: nil)
-    
-}
 
-func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any])
-{
-    myImageView.image = info[UIImagePickerControllerOriginalImage] as? UIImage
-    myImageView.backgroundColor = UIColor.clear
-    myImageView.contentMode = UIViewContentMode.scaleAspectFit
-    self.dismiss(animated: true, completion: nil)
-}
-*/
