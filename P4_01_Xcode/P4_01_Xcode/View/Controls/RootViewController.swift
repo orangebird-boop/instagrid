@@ -50,13 +50,21 @@ class RootViewController: UIViewController {
         titleLabel.font = UIFont(name: "ThirstySoftRegular" , size: 30)
         view.addSubview(titleLabel)
         
+       
         
-        
-        swipeLabel.text = "Swipe up to share"
+        swipeLabel.numberOfLines = 0
+        swipeLabel.textAlignment = .center
+        swipeLabel.text = "^ \nSwipe up to share"
         swipeLabel.textColor = .white
         swipeLabel.font = UIFont(name: "Delm-Medium" , size: 26)
+        
         view.addSubview(swipeLabel)
         
+        let swipeGestureRecognizerUp = UISwipeGestureRecognizer(target: self, action: #selector(userDidSwipe))
+        swipeGestureRecognizerUp.direction = .up
+        self.swipeLabel.addGestureRecognizer(swipeGestureRecognizerUp)
+        
+       
         
         print("is this happening?")
         layoutSelectionView.leftLayoutButton.addTarget(self, action: #selector(userDidTap), for: .touchUpInside)
@@ -179,15 +187,15 @@ class RootViewController: UIViewController {
         print("Layout button was tapped !")
     }
     
-    func createSwipe() {
-        let swipeLeft = UISwipeGestureRecognizer()
-        swipeLeft.addTarget(self, action: #selector(userDidSwipe))
-        swipeLeft.direction = .left
-        
-    }
+   
     
-    @objc func userDidSwipe() {
-        print("save image")
+    @objc func userDidSwipe(_ sender: UISwipeGestureRecognizer) {
+        var frame = swipeLabel.frame
+        
+        frame.origin.y -= 100.0
+        UIView.animate(withDuration: 0.25) {
+                self.swipeLabel.frame = frame
+            }
     }
     
     //BIG LAYOUTS //
