@@ -29,86 +29,62 @@ class LeftLayoutView: UIView {
         let layoutContainer = UIView()
         layoutContainer.backgroundColor = UIColor(red: 15/255, green: 102/255, blue: 152/255, alpha: 1)
         
-        let topFrame = UIImageView()
-        topFrame.backgroundColor = .white
-        
-        let leftBottomFrame = UIImageView()
-        leftBottomFrame.backgroundColor = .white
-        
-        let rightBottomFrame = UIImageView()
-        rightBottomFrame.backgroundColor = .white
+       
         
         
         
         
         topImageButton.setImage(UIImage(named: "Plus.png"), for: .normal)
-        topImageButton.contentMode = .scaleAspectFill
-        topImageButton.imageEdgeInsets = UIEdgeInsets.zero
+        topImageButton.backgroundColor = .white
+        topImageButton.imageEdgeInsets = UIEdgeInsets(top: 45, left: 180, bottom: 45, right: 180)
         topImageButton.contentVerticalAlignment = .fill
         topImageButton.contentHorizontalAlignment = .fill
         
         
         
         rightBottomImageButton.setImage(UIImage(named: "Plus.png"), for: .normal)
-        rightBottomImageButton.contentMode = .scaleAspectFill
-        rightBottomImageButton.imageEdgeInsets = UIEdgeInsets.zero
+        rightBottomImageButton.backgroundColor = .white
+        rightBottomImageButton.imageEdgeInsets = UIEdgeInsets(top: 45, left: 45, bottom: 45, right: 45)
         rightBottomImageButton.contentVerticalAlignment = .fill
         rightBottomImageButton.contentHorizontalAlignment = .fill
         
         
         
         leftBottomImageButton.setImage(UIImage(named: "Plus.png"), for: .normal)
-        leftBottomImageButton.contentMode = .scaleAspectFill
-        leftBottomImageButton.imageEdgeInsets = UIEdgeInsets.zero
+        leftBottomImageButton.backgroundColor = .white
+        leftBottomImageButton.imageEdgeInsets = UIEdgeInsets(top: 45, left: 45, bottom: 45, right: 45)
         leftBottomImageButton.contentVerticalAlignment = .fill
         leftBottomImageButton.contentHorizontalAlignment = .fill
         
         
         
-        addSubview(topFrame)
-        addSubview(leftBottomFrame)
-        addSubview(rightBottomFrame)
+       
         addSubview(topImageButton)
         addSubview(leftBottomImageButton)
         addSubview(rightBottomImageButton)
         
         
         
-        [topFrame, leftBottomFrame, rightBottomFrame, topImageButton,leftBottomImageButton,rightBottomImageButton ].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        [topImageButton,leftBottomImageButton,rightBottomImageButton ].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         
         
         NSLayoutConstraint.activate([
             
             
-            leftBottomFrame.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            leftBottomFrame.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            leftBottomFrame.heightAnchor.constraint(equalToConstant: 145),
-            leftBottomFrame.widthAnchor.constraint(equalToConstant: 145),
+            rightBottomImageButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            rightBottomImageButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 165),
+            rightBottomImageButton.heightAnchor.constraint(equalToConstant: 145),
+            rightBottomImageButton.widthAnchor.constraint(equalToConstant: 145),
             
-            rightBottomFrame.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            rightBottomFrame.leftAnchor.constraint(equalTo: leftAnchor, constant: 165),
-            rightBottomFrame.heightAnchor.constraint(equalToConstant: 145),
-            rightBottomFrame.widthAnchor.constraint(equalToConstant: 145),
+            leftBottomImageButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            leftBottomImageButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
+            leftBottomImageButton.heightAnchor.constraint(equalToConstant: 145),
+            leftBottomImageButton.widthAnchor.constraint(equalToConstant: 145),
             
-            topFrame.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            topFrame.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            topFrame.heightAnchor.constraint(equalToConstant: 145),
-            topFrame.widthAnchor.constraint(equalToConstant: 300),
-            
-            rightBottomImageButton.centerXAnchor.constraint(equalTo: rightBottomFrame.centerXAnchor),
-            rightBottomImageButton.centerYAnchor.constraint(equalTo: rightBottomFrame.centerYAnchor),
-            rightBottomImageButton.heightAnchor.constraint(equalToConstant: 45),
-            rightBottomImageButton.widthAnchor.constraint(equalToConstant: 45),
-            
-            leftBottomImageButton.centerXAnchor.constraint(equalTo: leftBottomFrame.centerXAnchor),
-            leftBottomImageButton.centerYAnchor.constraint(equalTo: leftBottomFrame.centerYAnchor),
-            leftBottomImageButton.heightAnchor.constraint(equalToConstant: 45),
-            leftBottomImageButton.widthAnchor.constraint(equalToConstant: 45),
-            
-            topImageButton.centerXAnchor.constraint(equalTo: topFrame.centerXAnchor),
-            topImageButton.centerYAnchor.constraint(equalTo: topFrame.centerYAnchor),
-            topImageButton.heightAnchor.constraint(equalToConstant: 45),
-            topImageButton.widthAnchor.constraint(equalToConstant: 45),
+            topImageButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            topImageButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
+            topImageButton.heightAnchor.constraint(equalToConstant: 145),
+            topImageButton.widthAnchor.constraint(equalToConstant: 300),
             
         ])
         

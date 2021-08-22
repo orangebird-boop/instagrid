@@ -17,11 +17,15 @@ class RootViewController: UIViewController {
     
     let layoutSelectionView = LayoutSelectionView()
     
+    
+    
     let layout1image = UIImage(named: "Layout 1.png")
     let layout2image = UIImage(named: "Layout 2.png")
     let layout3image = UIImage(named: "Layout 3.png")
     let selectedLayoutImage = UIImage(named: "Selected.png")
     let plusImageForButton = UIImage(named: "Plus.png")
+    
+  
     
     
     var lastTappedButton: UIButton?
@@ -29,10 +33,10 @@ class RootViewController: UIViewController {
     var lastUsedTag = 0
     
     let imagePicker = UIImagePickerController()
-    
+
     override func loadView() {
         super.loadView()
-    
+        
         
         view.backgroundColor = #colorLiteral(red: 0.6850972772, green: 0.8479481339, blue: 0.9051222205, alpha: 1)
         
@@ -53,11 +57,17 @@ class RootViewController: UIViewController {
         swipeLabel.font = UIFont(name: "Delm-Medium" , size: 26)
         view.addSubview(swipeLabel)
         
+        
+        print("is this happening?")
         layoutSelectionView.leftLayoutButton.addTarget(self, action: #selector(userDidTap), for: .touchUpInside)
         layoutSelectionView.middleLayoutButton.addTarget(self, action: #selector(userDidTap), for: .touchUpInside)
-        layoutSelectionView.rightLayoutButton.addTarget(self, action: #selector(userDidTap), for: .touchUpInside)
+        layoutSelectionView.rightLayoutButton .addTarget(self, action: #selector(userDidTap), for: .touchUpInside)
         
-        [titleLabel , swipeLabel, layoutSelectionView, layoutContainer, layoutSelectionView.leftLayoutButton, layoutSelectionView.middleLayoutButton, layoutSelectionView.rightLayoutButton ].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        self.view.addSubview(layoutSelectionView.leftLayoutButton)
+        self.view.addSubview(layoutSelectionView.middleLayoutButton)
+        self.view.addSubview(layoutSelectionView.rightLayoutButton)
+        
+        [titleLabel, swipeLabel, layoutSelectionView, layoutContainer, layoutSelectionView.leftLayoutButton, layoutSelectionView.middleLayoutButton, layoutSelectionView.rightLayoutButton ].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         
         NSLayoutConstraint.activate([
             
@@ -75,9 +85,24 @@ class RootViewController: UIViewController {
             
             layoutSelectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 25),
             layoutSelectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            layoutSelectionView.rightAnchor.constraint(equalTo: view.rightAnchor)
+            layoutSelectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            
+            layoutSelectionView.middleLayoutButton.bottomAnchor.constraint(equalTo: layoutSelectionView.bottomAnchor, constant: -32),
+            layoutSelectionView.middleLayoutButton.centerXAnchor.constraint(equalTo: layoutSelectionView.centerXAnchor),
+            layoutSelectionView.middleLayoutButton.widthAnchor.constraint(equalToConstant: 64),
+            layoutSelectionView.middleLayoutButton.heightAnchor.constraint(equalToConstant: 64),
+            
+            layoutSelectionView.leftLayoutButton.bottomAnchor.constraint(equalTo: layoutSelectionView.bottomAnchor, constant: -32),
+            layoutSelectionView.leftLayoutButton.rightAnchor.constraint(equalTo: layoutSelectionView.middleLayoutButton.leftAnchor, constant: -32),
+            layoutSelectionView.leftLayoutButton.widthAnchor.constraint(equalToConstant: 64),
+            layoutSelectionView.leftLayoutButton.heightAnchor.constraint(equalToConstant: 64),
             
             
+            
+            layoutSelectionView.rightLayoutButton.bottomAnchor.constraint(equalTo: layoutSelectionView.bottomAnchor, constant: -32),
+            layoutSelectionView.rightLayoutButton.leftAnchor.constraint(equalTo: layoutSelectionView.middleLayoutButton.rightAnchor, constant: 32),
+            layoutSelectionView.rightLayoutButton.widthAnchor.constraint(equalToConstant: 64),
+            layoutSelectionView.rightLayoutButton.heightAnchor.constraint(equalToConstant: 64),
             
             
         ])
@@ -123,6 +148,8 @@ class RootViewController: UIViewController {
             layoutView.rightBottomImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
             layoutView.leftBottomImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
             
+            finalLayoutView = layoutView
+            
         default:
             fatalError("This is bad")
         }
@@ -133,7 +160,7 @@ class RootViewController: UIViewController {
                 print("it got in the if statement")
                 layoutContainer.subviews.forEach { $0.removeFromSuperview() }
             }else{
-                print("it failed")
+                 
             }
             
             layoutContainer.addSubview(layoutView)
@@ -147,7 +174,7 @@ class RootViewController: UIViewController {
                 
             ])
         }
-        
+    
         
         print("Layout button was tapped !")
     }
@@ -205,6 +232,7 @@ extension RootViewController: UIImagePickerControllerDelegate, UINavigationContr
             lastTappedButton.imageEdgeInsets = UIEdgeInsets.zero
             lastTappedButton.contentVerticalAlignment = .fill
             lastTappedButton.contentHorizontalAlignment = .fill
+            
             
             self.lastTappedButton = nil
             

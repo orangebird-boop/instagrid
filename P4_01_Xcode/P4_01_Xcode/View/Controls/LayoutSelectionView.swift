@@ -14,9 +14,9 @@ class LayoutSelectionView: UIView {
     let layout3image = UIImage(named: "Layout 3.png")
     
     
-    let leftLayoutButton = UIButton()
-    let middleLayoutButton = UIButton()
-    let rightLayoutButton = UIButton()
+    public let leftLayoutButton = UIButton(type: .custom)
+    public let middleLayoutButton = UIButton(type: .custom)
+    public let rightLayoutButton = UIButton(type: .custom)
     
     
     override init(frame: CGRect) {
@@ -40,7 +40,7 @@ class LayoutSelectionView: UIView {
         leftLayoutButton.setImage(layout1image, for: .normal)
         leftLayoutButton.tag = 1
         
-        addSubview(leftLayoutButton)
+        
         
         middleLayoutButton.contentMode = .scaleAspectFill
         middleLayoutButton.imageEdgeInsets = UIEdgeInsets.zero
@@ -49,7 +49,7 @@ class LayoutSelectionView: UIView {
         middleLayoutButton.setImage(layout2image, for: .normal)
         middleLayoutButton.tag = 2
         
-        addSubview(middleLayoutButton)
+        
         
         rightLayoutButton.contentMode = .scaleAspectFill
         rightLayoutButton.imageEdgeInsets = UIEdgeInsets.zero
@@ -57,7 +57,14 @@ class LayoutSelectionView: UIView {
         rightLayoutButton.contentHorizontalAlignment = .fill
         rightLayoutButton.setImage(layout3image, for: .normal)
         rightLayoutButton.tag = 3
+/*
+        leftLayoutButton.addTarget(self, action: #selector(userDidTap), for: .touchUpInside)
+        middleLayoutButton.addTarget(self, action: #selector(userDidTap), for: .touchUpInside)
+        rightLayoutButton .addTarget(self, action: #selector(userDidTap), for: .touchUpInside)
+  */
         
+        addSubview(leftLayoutButton)
+        addSubview(middleLayoutButton)
         addSubview(rightLayoutButton)
         
         
@@ -91,10 +98,7 @@ class LayoutSelectionView: UIView {
         
     }
     
-    @objc func userDidTap() {
-        rightLayoutButton.backgroundColor = .blue
-        print("Button was tapped !")
-    }
+ 
     
 }
 
