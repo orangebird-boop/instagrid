@@ -11,6 +11,7 @@ class RootViewController: UIViewController {
     
     let titleLabel = UILabel()
     
+    let labelView = UIView()
     let swipeLabel = UILabel()
     
     let layoutContainer = UIView()
@@ -36,7 +37,7 @@ class RootViewController: UIViewController {
 
     override func loadView() {
         super.loadView()
-        
+        starterLayout()
         
         view.backgroundColor = #colorLiteral(red: 0.6850972772, green: 0.8479481339, blue: 0.9051222205, alpha: 1)
         
@@ -50,7 +51,8 @@ class RootViewController: UIViewController {
         titleLabel.font = UIFont(name: "ThirstySoftRegular" , size: 30)
         view.addSubview(titleLabel)
         
-       
+        labelView.backgroundColor = .red
+        view.addSubview(labelView)
         
         swipeLabel.numberOfLines = 0
         swipeLabel.textAlignment = .center
@@ -58,11 +60,11 @@ class RootViewController: UIViewController {
         swipeLabel.textColor = .white
         swipeLabel.font = UIFont(name: "Delm-Medium" , size: 26)
         
-        view.addSubview(swipeLabel)
+        labelView.addSubview(swipeLabel)
         
         let swipeGestureRecognizerUp = UISwipeGestureRecognizer(target: self, action: #selector(userDidSwipe))
         swipeGestureRecognizerUp.direction = .up
-        self.swipeLabel.addGestureRecognizer(swipeGestureRecognizerUp)
+        self.labelView.addGestureRecognizer(swipeGestureRecognizerUp)
         
        
         
@@ -75,16 +77,20 @@ class RootViewController: UIViewController {
         self.view.addSubview(layoutSelectionView.middleLayoutButton)
         self.view.addSubview(layoutSelectionView.rightLayoutButton)
         
-        [titleLabel, swipeLabel, layoutSelectionView, layoutContainer, layoutSelectionView.leftLayoutButton, layoutSelectionView.middleLayoutButton, layoutSelectionView.rightLayoutButton ].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
+        [titleLabel,labelView, swipeLabel, layoutSelectionView, layoutContainer, layoutSelectionView.leftLayoutButton, layoutSelectionView.middleLayoutButton, layoutSelectionView.rightLayoutButton ].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         
         NSLayoutConstraint.activate([
             
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
+            labelView.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: 140),
+            labelView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            labelView.heightAnchor.constraint(equalToConstant: 70),
+            labelView.widthAnchor.constraint(equalToConstant: 160),
             
-            swipeLabel.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: 162),
-            swipeLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            swipeLabel.topAnchor.constraint(equalTo: labelView.topAnchor, constant: 5),
+            swipeLabel.centerXAnchor.constraint(equalTo: labelView.centerXAnchor),
             
             layoutContainer.heightAnchor.constraint(equalToConstant: 320),
             layoutContainer.widthAnchor.constraint(equalToConstant: 320),
@@ -115,7 +121,29 @@ class RootViewController: UIViewController {
             
         ])
     }
-    
+    func starterLayout() {
+        var finalLayoutView : UIView?
+        
+        layoutSelectionView.leftLayoutButton.setImage(selectedLayoutImage, for: .normal)
+        
+        let layoutView = LeftLayoutView()
+        layoutView.topImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
+        layoutView.rightBottomImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
+        layoutView.leftBottomImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
+        
+        finalLayoutView = layoutView
+        
+        layoutContainer.addSubview(layoutView)
+        layoutView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            layoutView.topAnchor.constraint(equalTo: layoutContainer.topAnchor),
+            layoutView.rightAnchor.constraint(equalTo: layoutContainer.rightAnchor),
+            layoutView.bottomAnchor.constraint(equalTo: layoutContainer.bottomAnchor),
+            layoutView.leftAnchor.constraint(equalTo: layoutContainer.leftAnchor),
+            
+        ])
+    }
     @objc func userDidTap(_ sender: UIButton) {
         
         resetLayoutButtonImages()
@@ -189,14 +217,6 @@ class RootViewController: UIViewController {
     
    
     
-    @objc func userDidSwipe(_ sender: UISwipeGestureRecognizer) {
-        var frame = swipeLabel.frame
-        
-        frame.origin.y -= 100.0
-        UIView.animate(withDuration: 0.25) {
-                self.swipeLabel.frame = frame
-            }
-    }
     
     //BIG LAYOUTS //
     func resetLayoutButtonImages() {
@@ -218,7 +238,7 @@ class RootViewController: UIViewController {
         if let tappedImageButton = sender as? UIButton {
             lastTappedButton = tappedImageButton
         }
-        
+    
         
     }
     
@@ -248,5 +268,36 @@ extension RootViewController: UIImagePickerControllerDelegate, UINavigationContr
         
         picker.dismiss(animated: true, completion: nil)
     }
+    
+    @objc func userDidSwipe(_ sender: UISwipeGestureRecognizer) {
+       var frame = swipeLabel.frame
+        if sender.direction == .up {
+            frame.origin.y -= 200.0
+        UIView.animate(withDuration: 1) {
+                self.swipeLabel.frame = frame
+            self.shareImage()
+        }
+        }
+    }
+
+    
+    func shareImage() {
+        print("share image")
+        if let image = convertToImage() {
+            let activityApplicationsView = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+            present(activityApplicationsView, animated: true)
+           // activityApplicationsView.dismiss(animated: true, completion: nil)
+               
+    }
+    }
+     
+    
+     func convertToImage() -> UIImage? {
+            UIGraphicsBeginImageContextWithOptions(layoutContainer.bounds.size, true, 0)
+            layoutContainer.drawHierarchy(in: layoutContainer.bounds, afterScreenUpdates: true)
+            let image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return image
+        }
 }
 
