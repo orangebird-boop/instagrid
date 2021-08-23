@@ -30,17 +30,7 @@ class RightLayoutView: UIView {
         backgroundColor = UIColor(red: 15/255, green: 102/255, blue: 152/255, alpha: 1)
         
         
-        let leftTopFrame = UIImageView()
-        leftTopFrame.backgroundColor = .white
-        
-        let rightTopFrame = UIImageView()
-        rightTopFrame.backgroundColor = .white
-        
-        let leftBottomFrame = UIImageView()
-        leftBottomFrame.backgroundColor = .white
-        
-        let rightBottomFrame = UIImageView()
-        rightBottomFrame.backgroundColor = .white
+       
         
         
         rightTopImageButton.setImage(UIImage(named: "Plus.png"), for: .normal)
@@ -87,23 +77,23 @@ class RightLayoutView: UIView {
         NSLayoutConstraint.activate([
     
  
-            rightTopImageButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            rightTopImageButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 165),
+            rightTopImageButton.topAnchor.constraint(equalTo: topAnchor, constant: 11),
+            rightTopImageButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -11),
             rightTopImageButton.heightAnchor.constraint(equalToConstant: 145),
             rightTopImageButton.widthAnchor.constraint(equalToConstant: 145),
             
-            leftTopImageButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            leftTopImageButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
+            leftTopImageButton.topAnchor.constraint(equalTo: topAnchor, constant: 11),
+            leftTopImageButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 11),
             leftTopImageButton.heightAnchor.constraint(equalToConstant: 145),
             leftTopImageButton.widthAnchor.constraint(equalToConstant: 145),
             
-            rightBottomImageButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            rightBottomImageButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 165),
+            rightBottomImageButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -11),
+            rightBottomImageButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -11),
             rightBottomImageButton.heightAnchor.constraint(equalToConstant: 145),
             rightBottomImageButton.widthAnchor.constraint(equalToConstant: 145),
             
-            leftBottomImageButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            leftBottomImageButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
+            leftBottomImageButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -11),
+            leftBottomImageButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 11),
             leftBottomImageButton.heightAnchor.constraint(equalToConstant: 145),
             leftBottomImageButton.widthAnchor.constraint(equalToConstant: 145),
             

@@ -53,7 +53,7 @@ class MiddleLayoutView: UIView {
         NSLayoutConstraint.activate([
           
             rightTopImageButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            rightTopImageButton.leftAnchor.constraint(equalTo: leftTopImageButton.leftAnchor, constant: 155),
+            rightTopImageButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
             rightTopImageButton.heightAnchor.constraint(equalToConstant: 145),
             rightTopImageButton.widthAnchor.constraint(equalToConstant: 145),
             
