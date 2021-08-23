@@ -51,7 +51,7 @@ class RootViewController: UIViewController {
         titleLabel.font = UIFont(name: "ThirstySoftRegular" , size: 30)
         view.addSubview(titleLabel)
         
-        labelView.backgroundColor = .red
+        
         view.addSubview(labelView)
         
         swipeLabel.numberOfLines = 0
@@ -60,6 +60,7 @@ class RootViewController: UIViewController {
         swipeLabel.textColor = .white
         swipeLabel.font = UIFont(name: "Delm-Medium" , size: 26)
         
+        labelView.backgroundColor = .red
         labelView.addSubview(swipeLabel)
         
         let swipeGestureRecognizerUp = UISwipeGestureRecognizer(target: self, action: #selector(userDidSwipe))
@@ -81,39 +82,39 @@ class RootViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 24),
+            titleLabel.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2.0),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            labelView.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: 140),
+            labelView.topAnchor.constraint(equalToSystemSpacingBelow: titleLabel.bottomAnchor, multiplier: 8),
             labelView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             labelView.heightAnchor.constraint(equalToConstant: 70),
             labelView.widthAnchor.constraint(equalToConstant: 160),
             
-            swipeLabel.topAnchor.constraint(equalTo: labelView.topAnchor, constant: 5),
+            swipeLabel.centerYAnchor.constraint(equalTo: labelView.centerYAnchor),
             swipeLabel.centerXAnchor.constraint(equalTo: labelView.centerXAnchor),
             
-            layoutContainer.heightAnchor.constraint(equalToConstant: 320),
-            layoutContainer.widthAnchor.constraint(equalToConstant: 320),
-            layoutContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -200),
-            layoutContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            layoutContainer.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4),
+            layoutContainer.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4),
+            layoutContainer.topAnchor.constraint(equalToSystemSpacingBelow: labelView.bottomAnchor, multiplier: 10),
+            layoutContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
-            layoutSelectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 25),
+            layoutSelectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             layoutSelectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
             layoutSelectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            
-            layoutSelectionView.middleLayoutButton.bottomAnchor.constraint(equalTo: layoutSelectionView.bottomAnchor, constant: -32),
+           
+            layoutSelectionView.middleLayoutButton.bottomAnchor.constraint(equalTo: layoutSelectionView.safeAreaLayoutGuide.bottomAnchor),
             layoutSelectionView.middleLayoutButton.centerXAnchor.constraint(equalTo: layoutSelectionView.centerXAnchor),
             layoutSelectionView.middleLayoutButton.widthAnchor.constraint(equalToConstant: 64),
             layoutSelectionView.middleLayoutButton.heightAnchor.constraint(equalToConstant: 64),
             
-            layoutSelectionView.leftLayoutButton.bottomAnchor.constraint(equalTo: layoutSelectionView.bottomAnchor, constant: -32),
+            layoutSelectionView.leftLayoutButton.bottomAnchor.constraint(equalTo: layoutSelectionView.safeAreaLayoutGuide.bottomAnchor),
             layoutSelectionView.leftLayoutButton.rightAnchor.constraint(equalTo: layoutSelectionView.middleLayoutButton.leftAnchor, constant: -32),
             layoutSelectionView.leftLayoutButton.widthAnchor.constraint(equalToConstant: 64),
             layoutSelectionView.leftLayoutButton.heightAnchor.constraint(equalToConstant: 64),
             
             
             
-            layoutSelectionView.rightLayoutButton.bottomAnchor.constraint(equalTo: layoutSelectionView.bottomAnchor, constant: -32),
+            layoutSelectionView.rightLayoutButton.bottomAnchor.constraint(equalTo: layoutSelectionView.safeAreaLayoutGuide.bottomAnchor),
             layoutSelectionView.rightLayoutButton.leftAnchor.constraint(equalTo: layoutSelectionView.middleLayoutButton.rightAnchor, constant: 32),
             layoutSelectionView.rightLayoutButton.widthAnchor.constraint(equalToConstant: 64),
             layoutSelectionView.rightLayoutButton.heightAnchor.constraint(equalToConstant: 64),
@@ -122,7 +123,7 @@ class RootViewController: UIViewController {
         ])
     }
     func starterLayout() {
-        var finalLayoutView : UIView?
+         var finalLayoutView : UIView?
         
         layoutSelectionView.leftLayoutButton.setImage(selectedLayoutImage, for: .normal)
         
@@ -272,7 +273,7 @@ extension RootViewController: UIImagePickerControllerDelegate, UINavigationContr
     @objc func userDidSwipe(_ sender: UISwipeGestureRecognizer) {
        var frame = swipeLabel.frame
         if sender.direction == .up {
-            frame.origin.y -= 200.0
+            frame.origin.y -= 400.0
         UIView.animate(withDuration: 1) {
                 self.swipeLabel.frame = frame
             self.shareImage()
@@ -285,13 +286,20 @@ extension RootViewController: UIImagePickerControllerDelegate, UINavigationContr
         print("share image")
         if let image = convertToImage() {
             let activityApplicationsView = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-            present(activityApplicationsView, animated: true)
+            self.present(activityApplicationsView, animated: true)
+            activityApplicationsView.completionWithItemsHandler = { _, _,_,_ in
+                        UIView.animate(withDuration: 0.2) {
+                            self.loadView()
+                            self.starterLayout()
+                        }
+            
+                
            // activityApplicationsView.dismiss(animated: true, completion: nil)
                
     }
     }
      
-    
+    }
      func convertToImage() -> UIImage? {
             UIGraphicsBeginImageContextWithOptions(layoutContainer.bounds.size, true, 0)
             layoutContainer.drawHierarchy(in: layoutContainer.bounds, afterScreenUpdates: true)
