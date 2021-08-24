@@ -60,7 +60,7 @@ class RootViewController: UIViewController {
         swipeLabel.textColor = .white
         swipeLabel.font = UIFont(name: "Delm-Medium" , size: 26)
         
-        labelView.backgroundColor = .red
+       // labelView.backgroundColor = .red
         labelView.addSubview(swipeLabel)
         
         let swipeGestureRecognizerUp = UISwipeGestureRecognizer(target: self, action: #selector(userDidSwipe))
