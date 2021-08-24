@@ -71,18 +71,18 @@ class LeftLayoutView: UIView {
         NSLayoutConstraint.activate([
             
             
-            rightBottomImageButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -11),
-            rightBottomImageButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -11),
+            rightBottomImageButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            rightBottomImageButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
             rightBottomImageButton.heightAnchor.constraint(equalToConstant: 145),
             rightBottomImageButton.widthAnchor.constraint(equalToConstant: 145),
             
-            leftBottomImageButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -11),
-            leftBottomImageButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 11),
+            leftBottomImageButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
+            leftBottomImageButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
             leftBottomImageButton.heightAnchor.constraint(equalToConstant: 145),
             leftBottomImageButton.widthAnchor.constraint(equalToConstant: 145),
             
-            topImageButton.topAnchor.constraint(equalTo: topAnchor, constant: 11),
-            topImageButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 11),
+            topImageButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            topImageButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
             topImageButton.heightAnchor.constraint(equalToConstant: 145),
             topImageButton.widthAnchor.constraint(equalToConstant: 300),
             

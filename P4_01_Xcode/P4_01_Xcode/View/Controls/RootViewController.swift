@@ -26,7 +26,8 @@ class RootViewController: UIViewController {
     let selectedLayoutImage = UIImage(named: "Selected.png")
     let plusImageForButton = UIImage(named: "Plus.png")
     
-  
+    let thirstySoftRegular = UIFont(name: "ThirstySoftRegular" , size: 32)!
+    let delmMedium = UIFont(name: "Delm-Medium" , size: 28)!
     
     
     var lastTappedButton: UIButton?
@@ -48,24 +49,25 @@ class RootViewController: UIViewController {
         
         titleLabel.text = "Instagrid"
         titleLabel.textColor = .white
-        titleLabel.font = UIFont(name: "ThirstySoftRegular" , size: 30)
+        titleLabel.adjustsFontForContentSizeCategory = true
+        titleLabel.font = UIFontMetrics(forTextStyle: .largeTitle).scaledFont(for: thirstySoftRegular)
         view.addSubview(titleLabel)
         
         
-        view.addSubview(labelView)
+        
         
         swipeLabel.numberOfLines = 0
         swipeLabel.textAlignment = .center
         swipeLabel.text = "^ \nSwipe up to share"
         swipeLabel.textColor = .white
-        swipeLabel.font = UIFont(name: "Delm-Medium" , size: 26)
+        swipeLabel.adjustsFontForContentSizeCategory = true
+        swipeLabel.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: delmMedium)
         
-       // labelView.backgroundColor = .red
-        labelView.addSubview(swipeLabel)
-        
+        view.addSubview(swipeLabel)
+      
         let swipeGestureRecognizerUp = UISwipeGestureRecognizer(target: self, action: #selector(userDidSwipe))
         swipeGestureRecognizerUp.direction = .up
-        self.labelView.addGestureRecognizer(swipeGestureRecognizerUp)
+        self.layoutContainer.addGestureRecognizer(swipeGestureRecognizerUp)
         
        
         
@@ -82,27 +84,24 @@ class RootViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             
-            titleLabel.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 2.0),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            labelView.topAnchor.constraint(equalToSystemSpacingBelow: titleLabel.bottomAnchor, multiplier: 8),
-            labelView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            labelView.heightAnchor.constraint(equalToConstant: 70),
-            labelView.widthAnchor.constraint(equalToConstant: 160),
+         
             
-            swipeLabel.centerYAnchor.constraint(equalTo: labelView.centerYAnchor),
-            swipeLabel.centerXAnchor.constraint(equalTo: labelView.centerXAnchor),
-            
-            layoutContainer.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4),
-            layoutContainer.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.4),
-            layoutContainer.topAnchor.constraint(equalToSystemSpacingBelow: labelView.bottomAnchor, multiplier: 10),
+            layoutContainer.heightAnchor.constraint(equalToConstant: 320),
+            layoutContainer.widthAnchor.constraint(equalTo: layoutContainer.heightAnchor),
+            layoutContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 300),
             layoutContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
-            layoutSelectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+          
+            swipeLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            swipeLabel.bottomAnchor.constraint(equalTo: layoutContainer.topAnchor, constant: -20),
+            
+            layoutSelectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
             layoutSelectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
             layoutSelectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
-           
-            layoutSelectionView.middleLayoutButton.bottomAnchor.constraint(equalTo: layoutSelectionView.safeAreaLayoutGuide.bottomAnchor),
+            layoutSelectionView.middleLayoutButton.bottomAnchor.constraint(equalTo:layoutSelectionView.bottomAnchor),
             layoutSelectionView.middleLayoutButton.centerXAnchor.constraint(equalTo: layoutSelectionView.centerXAnchor),
             layoutSelectionView.middleLayoutButton.widthAnchor.constraint(equalToConstant: 64),
             layoutSelectionView.middleLayoutButton.heightAnchor.constraint(equalToConstant: 64),
@@ -123,7 +122,7 @@ class RootViewController: UIViewController {
         ])
     }
     func starterLayout() {
-         var finalLayoutView : UIView?
+      //   var finalLayoutView : UIView?
         
         layoutSelectionView.leftLayoutButton.setImage(selectedLayoutImage, for: .normal)
         
@@ -132,7 +131,7 @@ class RootViewController: UIViewController {
         layoutView.rightBottomImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
         layoutView.leftBottomImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
         
-        finalLayoutView = layoutView
+    //    finalLayoutView = layoutView
         
         layoutContainer.addSubview(layoutView)
         layoutView.translatesAutoresizingMaskIntoConstraints = false
@@ -271,11 +270,11 @@ extension RootViewController: UIImagePickerControllerDelegate, UINavigationContr
     }
     
     @objc func userDidSwipe(_ sender: UISwipeGestureRecognizer) {
-       var frame = swipeLabel.frame
+       var frame = layoutContainer.frame
         if sender.direction == .up {
-            frame.origin.y -= 400.0
+            frame.origin.y -= 1000.0
         UIView.animate(withDuration: 1) {
-                self.swipeLabel.frame = frame
+                self.layoutContainer.frame = frame
             self.shareImage()
         }
         }
