@@ -45,12 +45,14 @@ class RootViewController: UIViewController {
         view.addSubview(layoutSelectionView)
         
         layoutContainer.backgroundColor = UIColor(red: 15/255, green: 102/255, blue: 152/255, alpha: 1)
+        layoutContainer.sizeToFit()
         view.addSubview(layoutContainer)
         
         titleLabel.text = "Instagrid"
         titleLabel.textColor = .white
         titleLabel.adjustsFontForContentSizeCategory = true
         titleLabel.font = UIFontMetrics(forTextStyle: .largeTitle).scaledFont(for: thirstySoftRegular)
+        titleLabel.sizeToFit()
         view.addSubview(titleLabel)
         
         
@@ -61,6 +63,7 @@ class RootViewController: UIViewController {
         swipeLabel.text = "^ \nSwipe up to share"
         swipeLabel.textColor = .white
         swipeLabel.adjustsFontForContentSizeCategory = true
+        swipeLabel.sizeToFit()
         swipeLabel.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: delmMedium)
         
         view.addSubview(swipeLabel)
@@ -91,7 +94,7 @@ class RootViewController: UIViewController {
             
             layoutContainer.heightAnchor.constraint(equalToConstant: 320),
             layoutContainer.widthAnchor.constraint(equalTo: layoutContainer.heightAnchor),
-            layoutContainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 300),
+            layoutContainer.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
             layoutContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
           
