@@ -62,8 +62,9 @@ class LeftLayoutView: UIView {
         addSubview(topImageButton)
         addSubview(leftBottomImageButton)
         addSubview(rightBottomImageButton)
-        
-        
+      //  topImageButton.sizeToFit()
+      //  leftBottomImageButton.sizeToFit()
+      //  rightBottomImageButton.sizeToFit()
         
         [topImageButton,leftBottomImageButton,rightBottomImageButton ].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         

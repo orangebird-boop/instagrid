@@ -26,7 +26,7 @@ class RootViewController: UIViewController {
     let selectedLayoutImage = UIImage(named: "Selected.png")
     let plusImageForButton = UIImage(named: "Plus.png")
     
-    let thirstySoftRegular = UIFont(name: "ThirstySoftRegular" , size: 32)!
+    let thirstySoftRegular = UIFont(name: "ThirstySoftRegular" , size: 30)!
     let delmMedium = UIFont(name: "Delm-Medium" , size: 28)!
     
     
@@ -48,16 +48,16 @@ class RootViewController: UIViewController {
         view.addSubview(layoutSelectionView)
         
         layoutContainer.backgroundColor = UIColor(red: 15/255, green: 102/255, blue: 152/255, alpha: 1)
-        layoutContainer.sizeToFit()
+        
         view.addSubview(layoutContainer)
+        layoutContainer.sizeToFit()
         
         titleLabel.text = "Instagrid"
         titleLabel.textColor = .white
         titleLabel.adjustsFontForContentSizeCategory = true
         titleLabel.font = UIFontMetrics(forTextStyle: .largeTitle).scaledFont(for: thirstySoftRegular)
-        titleLabel.sizeToFit()
         view.addSubview(titleLabel)
-        
+        titleLabel.sizeToFit()
         
         
         
@@ -66,10 +66,9 @@ class RootViewController: UIViewController {
         swipeLabel.text = "^ \nSwipe up to share"
         swipeLabel.textColor = .white
         swipeLabel.adjustsFontForContentSizeCategory = true
-        swipeLabel.sizeToFit()
         swipeLabel.font = UIFontMetrics(forTextStyle: .title3).scaledFont(for: delmMedium)
-        
         view.addSubview(swipeLabel)
+        swipeLabel.sizeToFit()
         
         let swipeGestureRecognizerUp = UISwipeGestureRecognizer(target: self, action: #selector(userDidSwipe))
         swipeGestureRecognizerUp.direction = .up
@@ -86,7 +85,8 @@ class RootViewController: UIViewController {
         self.view.addSubview(layoutSelectionView.middleLayoutButton)
         self.view.addSubview(layoutSelectionView.rightLayoutButton)
         
-        
+        constraints()
+        NSLayoutConstraint.activate(portrait)
     }
     
     
@@ -138,29 +138,39 @@ class RootViewController: UIViewController {
         
         landscape = [
             
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             
             
             layoutContainer.heightAnchor.constraint(equalToConstant: 320),
             layoutContainer.widthAnchor.constraint(equalTo: layoutContainer.heightAnchor),
-            layoutContainer.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+           // layoutContainer.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -500),
+            layoutContainer.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -8),
             layoutContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
             
-            swipeLabel.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
-            swipeLabel.rightAnchor.constraint(equalTo: layoutContainer.rightAnchor, constant: -20),
+            //swipeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
+            swipeLabel.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 150),
+            swipeLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
+            /*
             layoutSelectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
             layoutSelectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            layoutSelectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            layoutSelectionView.rightAnchor.constraint(equalTo: view.rightAnchor),*/
             
-            layoutSelectionView.middleLayoutButton.bottomAnchor.constraint(equalTo:layoutSelectionView.bottomAnchor),
-            layoutSelectionView.middleLayoutButton.centerXAnchor.constraint(equalTo: layoutSelectionView.centerXAnchor),
-            layoutSelectionView.middleLayoutButton.widthAnchor.constraint(equalToConstant: 64),
-            layoutSelectionView.middleLayoutButton.heightAnchor.constraint(equalToConstant: 64),
+           // layoutSelectionView.middleLayoutButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            layoutSelectionView.middleLayoutButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            layoutSelectionView.middleLayoutButton.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -100),
             
+            layoutSelectionView.leftLayoutButton.bottomAnchor.constraint(equalTo: layoutSelectionView.middleLayoutButton.topAnchor, constant: -32),
+            layoutSelectionView.leftLayoutButton.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -100),
+            
+            layoutSelectionView.rightLayoutButton.topAnchor.constraint(equalTo: layoutSelectionView.middleLayoutButton.bottomAnchor, constant: 32),
+            layoutSelectionView.rightLayoutButton.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -100),
+          //  layoutSelectionView.middleLayoutButton.widthAnchor.constraint(equalToConstant: 64),
+          //  layoutSelectionView.middleLayoutButton.heightAnchor.constraint(equalToConstant: 64),
+            /*
             layoutSelectionView.leftLayoutButton.bottomAnchor.constraint(equalTo: layoutSelectionView.safeAreaLayoutGuide.bottomAnchor),
             layoutSelectionView.leftLayoutButton.rightAnchor.constraint(equalTo: layoutSelectionView.middleLayoutButton.leftAnchor, constant: -32),
             layoutSelectionView.leftLayoutButton.widthAnchor.constraint(equalToConstant: 64),
@@ -171,7 +181,7 @@ class RootViewController: UIViewController {
             layoutSelectionView.rightLayoutButton.bottomAnchor.constraint(equalTo: layoutSelectionView.safeAreaLayoutGuide.bottomAnchor),
             layoutSelectionView.rightLayoutButton.leftAnchor.constraint(equalTo: layoutSelectionView.middleLayoutButton.rightAnchor, constant: 32),
             layoutSelectionView.rightLayoutButton.widthAnchor.constraint(equalToConstant: 64),
-            layoutSelectionView.rightLayoutButton.heightAnchor.constraint(equalToConstant: 64),
+            layoutSelectionView.rightLayoutButton.heightAnchor.constraint(equalToConstant: 64),*/
         ]
         
     }
@@ -192,13 +202,19 @@ class RootViewController: UIViewController {
      */
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        
+     //   constraints()
         super.viewWillTransition(to: size, with: coordinator)
         if UIDevice.current.orientation.isLandscape {
             print("Landscape")
+            swipeLabel.text = "< \nSwipe left to share"
             NSLayoutConstraint.deactivate(portrait)
             NSLayoutConstraint.activate(landscape)
         } else {
             print("Portrait")
+            
+            swipeLabel.text = "^ \nSwipe up to share"
+            swipeLabel.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: delmMedium)
             NSLayoutConstraint.deactivate(landscape)
             NSLayoutConstraint.activate(portrait)
         }
@@ -356,9 +372,25 @@ extension RootViewController: UIImagePickerControllerDelegate, UINavigationContr
         
         picker.dismiss(animated: true, completion: nil)
     }
-    
+    /*
+    // Manage swipe direction depending on screen orientation
+    @objc func whichSwipe(_ sender: UISwipeGestureRecognizer) {
+        if sender.direction == .up && UIScreen.main.bounds.size.height > UIScreen.main.bounds.size.width {
+            CentralView.animate(withDuration: 1) {
+            self.centralView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
+            }
+            self.shareCentralView()
+        } else if sender.direction == .left &&  UIScreen.main.bounds.size.height < UIScreen.main.bounds.size.width {
+            CentralView.animate(withDuration: 1) {
+            self.centralView.transform = CGAffineTransform(translationX: -self.view.frame.width, y: 0)
+            }
+            self.shareCentralView()
+        }
+    }
+    */
     @objc func userDidSwipe(_ sender: UISwipeGestureRecognizer) {
         var frame = layoutContainer.frame
+        
         if sender.direction == .up {
             frame.origin.y -= 1000.0
             UIView.animate(withDuration: 1) {
@@ -395,4 +427,5 @@ extension RootViewController: UIImagePickerControllerDelegate, UINavigationContr
         return image
     }
 }
+
 

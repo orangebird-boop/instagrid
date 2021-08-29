@@ -33,6 +33,8 @@ class LayoutSelectionView: UIView {
     func setupView() {
         print("Paul is here")
         
+        
+        
         leftLayoutButton.contentMode = .scaleAspectFill
         leftLayoutButton.imageEdgeInsets = UIEdgeInsets.zero
         leftLayoutButton.contentVerticalAlignment = .fill
@@ -73,20 +75,20 @@ class LayoutSelectionView: UIView {
         
         NSLayoutConstraint.activate([
             
-            middleLayoutButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
-            middleLayoutButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+          //  middleLayoutButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
+         //   middleLayoutButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             middleLayoutButton.widthAnchor.constraint(equalToConstant: 64),
             middleLayoutButton.heightAnchor.constraint(equalToConstant: 64),
             
-            leftLayoutButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
-            leftLayoutButton.rightAnchor.constraint(equalTo: middleLayoutButton.leftAnchor, constant: -32),
+        //    leftLayoutButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
+        //    leftLayoutButton.rightAnchor.constraint(equalTo: middleLayoutButton.leftAnchor, constant: -32),
             leftLayoutButton.widthAnchor.constraint(equalToConstant: 64),
             leftLayoutButton.heightAnchor.constraint(equalToConstant: 64),
             
             
             
-            rightLayoutButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
-            rightLayoutButton.leftAnchor.constraint(equalTo: middleLayoutButton.rightAnchor, constant: 32),
+      //      rightLayoutButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
+      //      rightLayoutButton.leftAnchor.constraint(equalTo: middleLayoutButton.rightAnchor, constant: 32),
             rightLayoutButton.widthAnchor.constraint(equalToConstant: 64),
             rightLayoutButton.heightAnchor.constraint(equalToConstant: 64),
             
