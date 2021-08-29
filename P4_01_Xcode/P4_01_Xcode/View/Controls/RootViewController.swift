@@ -221,7 +221,11 @@ class RootViewController: UIViewController {
             self.present(activityApplicationsView, animated: true)
             activityApplicationsView.completionWithItemsHandler = { _, _,_,_ in
                 UIView.animate(withDuration: 0.2) {
-                 
+                    if UIDevice.current.orientation.isPortrait {
+                        self.starterLayout()
+                    }else if UIDevice.current.orientation.isLandscape {
+                        self.starterLayoutLandscape()
+                    }
                 }
             }
         }
@@ -231,7 +235,8 @@ class RootViewController: UIViewController {
     
     // sets the layout when app opens in portrait mode
     func starterLayout() {
-        
+        layoutContainer.subviews.forEach { $0.removeFromSuperview()}
+        resetLayoutButtonImages()
         activateSwipe(orientation: "portrait")
         
         layoutSelectionView.leftLayoutButton.setImage(selectedLayoutImage, for: .normal)
@@ -255,7 +260,31 @@ class RootViewController: UIViewController {
         ])
     }
     
-    
+    func starterLayoutLandscape() {
+        layoutContainer.subviews.forEach { $0.removeFromSuperview()}
+        resetLayoutButtonImages()
+        activateSwipe(orientation: "landscape")
+        
+        layoutSelectionView.leftLayoutButton.setImage(selectedLayoutImage, for: .normal)
+        
+        let layoutView = LeftLayoutView()
+        layoutView.topImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
+        layoutView.rightBottomImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
+        layoutView.leftBottomImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
+        
+        
+        
+        layoutContainer.addSubview(layoutView)
+        layoutView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            layoutView.topAnchor.constraint(equalTo: layoutContainer.topAnchor),
+            layoutView.rightAnchor.constraint(equalTo: layoutContainer.rightAnchor),
+            layoutView.bottomAnchor.constraint(equalTo: layoutContainer.bottomAnchor),
+            layoutView.leftAnchor.constraint(equalTo: layoutContainer.leftAnchor),
+            
+        ])
+    }
     
     //detects tap on layout buttons and sets layoutContainer view as selected
     @objc func userDidTap(_ sender: UIButton) {
