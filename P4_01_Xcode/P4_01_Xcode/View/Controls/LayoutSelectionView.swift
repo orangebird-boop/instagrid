@@ -1,9 +1,4 @@
-//
-//  LayoutSelectionView.swift
-//  P4_01_Xcode
-//
-//  Created by Nora Lilla Matyassi on 05/08/2021.
-//
+
 
 import UIKit
 
@@ -59,11 +54,7 @@ class LayoutSelectionView: UIView {
         rightLayoutButton.contentHorizontalAlignment = .fill
         rightLayoutButton.setImage(layout3image, for: .normal)
         rightLayoutButton.tag = 3
-/*
-        leftLayoutButton.addTarget(self, action: #selector(userDidTap), for: .touchUpInside)
-        middleLayoutButton.addTarget(self, action: #selector(userDidTap), for: .touchUpInside)
-        rightLayoutButton .addTarget(self, action: #selector(userDidTap), for: .touchUpInside)
-  */
+
         
         addSubview(leftLayoutButton)
         addSubview(middleLayoutButton)
@@ -75,32 +66,20 @@ class LayoutSelectionView: UIView {
         
         NSLayoutConstraint.activate([
             
-          //  middleLayoutButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
-         //   middleLayoutButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+          
             middleLayoutButton.widthAnchor.constraint(equalToConstant: 64),
             middleLayoutButton.heightAnchor.constraint(equalToConstant: 64),
             
-        //    leftLayoutButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
-        //    leftLayoutButton.rightAnchor.constraint(equalTo: middleLayoutButton.leftAnchor, constant: -32),
             leftLayoutButton.widthAnchor.constraint(equalToConstant: 64),
             leftLayoutButton.heightAnchor.constraint(equalToConstant: 64),
-            
-            
-            
-      //      rightLayoutButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -32),
-      //      rightLayoutButton.leftAnchor.constraint(equalTo: middleLayoutButton.rightAnchor, constant: 32),
+
             rightLayoutButton.widthAnchor.constraint(equalToConstant: 64),
             rightLayoutButton.heightAnchor.constraint(equalToConstant: 64),
-            
-            
+                  
             
         ])
-        
-        
-        
+
     }
-    
- 
-    
+
 }
 

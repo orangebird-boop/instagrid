@@ -28,7 +28,7 @@ class MiddleLayoutView: UIView {
         bottomImageButton.imageEdgeInsets = UIEdgeInsets(top: 45, left: 180, bottom: 45, right: 180)
         bottomImageButton.contentVerticalAlignment = .fill
         bottomImageButton.contentHorizontalAlignment = .fill
-       
+        
         
         rightTopImageButton.setImage(UIImage(named: "Plus.png"), for: .normal)
         rightTopImageButton.backgroundColor = .white
@@ -51,7 +51,7 @@ class MiddleLayoutView: UIView {
         [bottomImageButton, leftTopImageButton, rightTopImageButton ].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         
         NSLayoutConstraint.activate([
-          
+            
             rightTopImageButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             rightTopImageButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
             rightTopImageButton.heightAnchor.constraint(equalToConstant: 145),

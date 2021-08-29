@@ -1,9 +1,4 @@
-//
-//  LeftLayoutView.swift
-//  P4_01_Xcode
-//
-//  Created by Nora Lilla Matyassi on 20/08/2021.
-//
+
 
 import UIKit
 
@@ -29,17 +24,12 @@ class LeftLayoutView: UIView {
         let layoutContainer = UIView()
         layoutContainer.backgroundColor = UIColor(red: 15/255, green: 102/255, blue: 152/255, alpha: 1)
         
-       
-        
-        
-        
         
         topImageButton.setImage(UIImage(named: "Plus.png"), for: .normal)
         topImageButton.backgroundColor = .white
         topImageButton.imageEdgeInsets = UIEdgeInsets(top: 45, left: 180, bottom: 45, right: 180)
         topImageButton.contentVerticalAlignment = .fill
         topImageButton.contentHorizontalAlignment = .fill
-        
         
         
         rightBottomImageButton.setImage(UIImage(named: "Plus.png"), for: .normal)
@@ -49,7 +39,6 @@ class LeftLayoutView: UIView {
         rightBottomImageButton.contentHorizontalAlignment = .fill
         
         
-        
         leftBottomImageButton.setImage(UIImage(named: "Plus.png"), for: .normal)
         leftBottomImageButton.backgroundColor = .white
         leftBottomImageButton.imageEdgeInsets = UIEdgeInsets(top: 45, left: 45, bottom: 45, right: 45)
@@ -57,14 +46,10 @@ class LeftLayoutView: UIView {
         leftBottomImageButton.contentHorizontalAlignment = .fill
         
         
-        
-       
         addSubview(topImageButton)
         addSubview(leftBottomImageButton)
         addSubview(rightBottomImageButton)
-      //  topImageButton.sizeToFit()
-      //  leftBottomImageButton.sizeToFit()
-      //  rightBottomImageButton.sizeToFit()
+        
         
         [topImageButton,leftBottomImageButton,rightBottomImageButton ].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         

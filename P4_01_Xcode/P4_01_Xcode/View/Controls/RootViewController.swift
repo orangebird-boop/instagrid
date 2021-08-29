@@ -1,14 +1,10 @@
-//
-//  RootViewController.swift
-//  P4_01_Xcode
-//
-//  Created by Nora Lilla Matyassi on 05/08/2021.
-//
+
 
 import UIKit
 
 class RootViewController: UIViewController {
     
+    //views
     let titleLabel = UILabel()
     
     let labelView = UIView()
@@ -19,29 +15,29 @@ class RootViewController: UIViewController {
     let layoutSelectionView = LayoutSelectionView()
     
     
-    
+    //images
     let layout1image = UIImage(named: "Layout 1.png")
     let layout2image = UIImage(named: "Layout 2.png")
     let layout3image = UIImage(named: "Layout 3.png")
     let selectedLayoutImage = UIImage(named: "Selected.png")
     let plusImageForButton = UIImage(named: "Plus.png")
-    
+    //fonts
     let thirstySoftRegular = UIFont(name: "ThirstySoftRegular" , size: 30)!
     let delmMedium = UIFont(name: "Delm-Medium" , size: 28)!
     
-    
+    //buttons
     var lastTappedButton: UIButton?
     
     var lastUsedTag = 0
     
     let imagePicker = UIImagePickerController()
-    
+    //constraints
     var portrait = [NSLayoutConstraint]()
     var landscape = [NSLayoutConstraint]()
     
     override func loadView() {
         super.loadView()
-        starterLayout()
+        
         
         view.backgroundColor = #colorLiteral(red: 0.6850972772, green: 0.8479481339, blue: 0.9051222205, alpha: 1)
         
@@ -70,7 +66,7 @@ class RootViewController: UIViewController {
         view.addSubview(swipeLabel)
         swipeLabel.sizeToFit()
         
-       
+        
         
         print("is this happening?")
         layoutSelectionView.leftLayoutButton.addTarget(self, action: #selector(userDidTap), for: .touchUpInside)
@@ -82,13 +78,14 @@ class RootViewController: UIViewController {
         self.view.addSubview(layoutSelectionView.rightLayoutButton)
         
         constraints()
-        NSLayoutConstraint.activate(portrait)
+         
+        starterLayout()
     }
     
     
     
     
-    
+    // these are the onstraints for portrait and landscape orientation
     func constraints() {
         
         [titleLabel,labelView, swipeLabel, layoutSelectionView, layoutContainer, layoutSelectionView.leftLayoutButton, layoutSelectionView.middleLayoutButton, layoutSelectionView.rightLayoutButton ].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
@@ -135,28 +132,21 @@ class RootViewController: UIViewController {
         landscape = [
             
             titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            titleLabel.centerXAnchor.constraint(equalTo: layoutContainer.centerXAnchor),
             
             
             
             layoutContainer.heightAnchor.constraint(equalToConstant: 320),
             layoutContainer.widthAnchor.constraint(equalTo: layoutContainer.heightAnchor),
-           // layoutContainer.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -500),
-            layoutContainer.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -8),
-            layoutContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+             layoutContainer.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: -120),
+            layoutContainer.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -10),
+     
             
-            
-            //swipeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            swipeLabel.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: 150),
+            swipeLabel.leftAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.centerXAnchor, constant: -350),
             swipeLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
-            /*
-            layoutSelectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
-            layoutSelectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            layoutSelectionView.rightAnchor.constraint(equalTo: view.rightAnchor),*/
-            
-           // layoutSelectionView.middleLayoutButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            layoutSelectionView.middleLayoutButton.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+           
+            layoutSelectionView.middleLayoutButton.centerYAnchor.constraint(equalTo: layoutContainer.centerYAnchor),
             layoutSelectionView.middleLayoutButton.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -100),
             
             layoutSelectionView.leftLayoutButton.bottomAnchor.constraint(equalTo: layoutSelectionView.middleLayoutButton.topAnchor, constant: -32),
@@ -164,77 +154,85 @@ class RootViewController: UIViewController {
             
             layoutSelectionView.rightLayoutButton.topAnchor.constraint(equalTo: layoutSelectionView.middleLayoutButton.bottomAnchor, constant: 32),
             layoutSelectionView.rightLayoutButton.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -100),
-          //  layoutSelectionView.middleLayoutButton.widthAnchor.constraint(equalToConstant: 64),
-          //  layoutSelectionView.middleLayoutButton.heightAnchor.constraint(equalToConstant: 64),
-            /*
-            layoutSelectionView.leftLayoutButton.bottomAnchor.constraint(equalTo: layoutSelectionView.safeAreaLayoutGuide.bottomAnchor),
-            layoutSelectionView.leftLayoutButton.rightAnchor.constraint(equalTo: layoutSelectionView.middleLayoutButton.leftAnchor, constant: -32),
-            layoutSelectionView.leftLayoutButton.widthAnchor.constraint(equalToConstant: 64),
-            layoutSelectionView.leftLayoutButton.heightAnchor.constraint(equalToConstant: 64),
             
-            
-            
-            layoutSelectionView.rightLayoutButton.bottomAnchor.constraint(equalTo: layoutSelectionView.safeAreaLayoutGuide.bottomAnchor),
-            layoutSelectionView.rightLayoutButton.leftAnchor.constraint(equalTo: layoutSelectionView.middleLayoutButton.rightAnchor, constant: 32),
-            layoutSelectionView.rightLayoutButton.widthAnchor.constraint(equalToConstant: 64),
-            layoutSelectionView.rightLayoutButton.heightAnchor.constraint(equalToConstant: 64),*/
         ]
         
     }
     
-    /*
-     override func viewDidLayoutSubviews() {
-     if UIDevice.current.orientation.isLandscape {
-     print("Landscape")
-     NSLayoutConstraint.deactivate(portrait!)
-     NSLayoutConstraint.activate(landscape!)
-     } else {
-     print("Portrait")
-     NSLayoutConstraint.deactivate(landscape!)
-     NSLayoutConstraint.activate(portrait!)
-     }
-     }
-     
-     
-     
-     */
     
+    // checks the orientation of the device
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         
-     //   constraints()
-        super.viewWillTransition(to: size, with: coordinator)
         
-        if UIDevice.current.orientation.isLandscape  {
-            
+        super.viewWillTransition(to: size, with: coordinator)
+        if UIDevice.current.orientation.isLandscape {
+            activateSwipe(orientation: "landscape")
+        }else if UIDevice.current.orientation.isPortrait {
+            activateSwipe(orientation: "portrait")
+        }
+     
+    }
+    
+    
+    
+    // enables a different swipe gesture on each orientation
+    func activateSwipe(orientation: String){
+        
+        if orientation == "landscape" {
             print("Landscape")
+            
+            
+            let swipeGestureRecognizerLeft = UISwipeGestureRecognizer(target: self, action: #selector(userDidSwipe))
+            swipeGestureRecognizerLeft.direction = .left
+            
+            self.layoutContainer.addGestureRecognizer(swipeGestureRecognizerLeft)
+            
+            swipeLabel.text = "< \nSwipe left to share"
+            
+            NSLayoutConstraint.deactivate(portrait)
+            NSLayoutConstraint.activate(landscape)
+            
+        } else if orientation == "portrait" {
+            print("Portrait")
             
             let swipeGestureRecognizerUp = UISwipeGestureRecognizer(target: self, action: #selector(userDidSwipe))
             swipeGestureRecognizerUp.direction = .up
             
             self.layoutContainer.addGestureRecognizer(swipeGestureRecognizerUp)
-            swipeLabel.text = "< \nSwipe left to share"
-            NSLayoutConstraint.deactivate(portrait)
-            NSLayoutConstraint.activate(landscape)
             
-        } else if UIDevice.current.orientation.isPortrait {
-            
-            print("Portrait")
-            let swipeGestureRecognizerLeft = UISwipeGestureRecognizer(target: self, action: #selector(userDidSwipe))
-            swipeGestureRecognizerLeft.direction = .left
-            
-            self.layoutContainer.addGestureRecognizer(swipeGestureRecognizerLeft)
             swipeLabel.text = "^ \nSwipe up to share"
+            
             swipeLabel.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: delmMedium)
+            
             NSLayoutConstraint.deactivate(landscape)
             NSLayoutConstraint.activate(portrait)
+            
+        }
+        
+    }
+    
+    
+    
+    // enables UIActivityViewController
+    func shareImage(a : String) {
+        print("share image")
+        if let image = convertToImage() {
+            let activityApplicationsView = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+            self.present(activityApplicationsView, animated: true)
+            activityApplicationsView.completionWithItemsHandler = { _, _,_,_ in
+                UIView.animate(withDuration: 0.2) {
+                 
+                }
+            }
         }
     }
     
     
     
-    
+    // sets the layout when app opens in portrait mode
     func starterLayout() {
         
+        activateSwipe(orientation: "portrait")
         
         layoutSelectionView.leftLayoutButton.setImage(selectedLayoutImage, for: .normal)
         
@@ -255,34 +253,11 @@ class RootViewController: UIViewController {
             layoutView.leftAnchor.constraint(equalTo: layoutContainer.leftAnchor),
             
         ])
-    
-        /*
-        if UIDevice.current.orientation.isPortrait {
-            print("this is starter portrait")
-            NSLayoutConstraint.deactivate(landscape)
-            NSLayoutConstraint.activate(portrait)
-           
-            
-        } else if UIDevice.current.orientation.isPortrait {
-            print("this is starter landscape")
-            NSLayoutConstraint.deactivate(portrait)
-            NSLayoutConstraint.activate(landscape)
-         
-             */
-            
-        
-            /*
-        NSLayoutConstraint.activate([
-            layoutView.topAnchor.constraint(equalTo: layoutContainer.topAnchor),
-            layoutView.rightAnchor.constraint(equalTo: layoutContainer.rightAnchor),
-            layoutView.bottomAnchor.constraint(equalTo: layoutContainer.bottomAnchor),
-            layoutView.leftAnchor.constraint(equalTo: layoutContainer.leftAnchor),
-            
-        ])
- */
     }
     
     
+    
+    //detects tap on layout buttons and sets layoutContainer view as selected
     @objc func userDidTap(_ sender: UIButton) {
         
         resetLayoutButtonImages()
@@ -298,6 +273,7 @@ class RootViewController: UIViewController {
             layoutSelectionView.leftLayoutButton.setImage(selectedLayoutImage, for: .normal)
             
             let layoutView = LeftLayoutView()
+            
             layoutView.topImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
             layoutView.rightBottomImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
             layoutView.leftBottomImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
@@ -306,6 +282,7 @@ class RootViewController: UIViewController {
             
         case 2:
             layoutSelectionView.middleLayoutButton.setImage(selectedLayoutImage, for: .normal)
+            
             let layoutView = MiddleLayoutView()
             
             layoutView.leftTopImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
@@ -316,6 +293,7 @@ class RootViewController: UIViewController {
             
         case 3:
             layoutSelectionView.rightLayoutButton.setImage(selectedLayoutImage, for: .normal)
+            
             let layoutView = RightLayoutView()
             
             layoutView.rightTopImageButton.addTarget(self, action: #selector(pickImage), for: .touchUpInside)
@@ -349,15 +327,13 @@ class RootViewController: UIViewController {
                 
             ])
         }
-        
-        
         print("Layout button was tapped !")
     }
     
     
     
     
-    //BIG LAYOUTS //
+    //resets layout button's image back from selected to initial image
     func resetLayoutButtonImages() {
         layoutSelectionView.leftLayoutButton.setImage(layout1image, for: .normal)
         layoutSelectionView.middleLayoutButton.setImage(layout2image, for: .normal)
@@ -368,7 +344,7 @@ class RootViewController: UIViewController {
     
     
     
-    
+    //enables image picker
     @objc func pickImage(_ sender: AnyObject) {
         print( "the plus was clicked")
         imagePicker.delegate = self
@@ -377,14 +353,46 @@ class RootViewController: UIViewController {
         if let tappedImageButton = sender as? UIButton {
             lastTappedButton = tappedImageButton
         }
-        
-        
     }
     
     
     
     
+    //detects swipe and animates it
+    @objc func userDidSwipe(_ sender: UISwipeGestureRecognizer) {
+        var frame = layoutContainer.frame
+        
+        if sender.direction == .up {
+            frame.origin.y -= 1000.0
+            UIView.animate(withDuration: 1) {
+                self.layoutContainer.frame = frame
+                self.shareImage(a: "up")
+                
+            }
+        } else if sender.direction == .left {
+            frame.origin.x -= 1000.0
+            UIView.animate(withDuration: 1) {
+                self.layoutContainer.frame = frame
+                self.shareImage(a: "left")
+            }
+        }
+    }
+    
+    
+    
+ // converts image before saving it to photos
+    func convertToImage() -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(layoutContainer.bounds.size, true, 0)
+        layoutContainer.drawHierarchy(in: layoutContainer.bounds, afterScreenUpdates: true)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
+    }
+    
 }
+
+
+
 
 extension RootViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -406,50 +414,6 @@ extension RootViewController: UIImagePickerControllerDelegate, UINavigationContr
         }
         
         picker.dismiss(animated: true, completion: nil)
-    }
-   
-    @objc func userDidSwipe(_ sender: UISwipeGestureRecognizer) {
-        var frame = layoutContainer.frame
-        
-        if sender.direction == .up {
-            frame.origin.y -= 1000.0
-            UIView.animate(withDuration: 1) {
-                self.layoutContainer.frame = frame
-                self.shareImage()
-            }
-        } else if sender.direction == .left {
-            frame.origin.x -= 1000.0
-            UIView.animate(withDuration: 1) {
-               self.layoutContainer.frame = frame
-                self.shareImage()
-        }
-    }
-    }
-    
-    func shareImage() {
-        print("share image")
-        if let image = convertToImage() {
-            let activityApplicationsView = UIActivityViewController(activityItems: [image], applicationActivities: nil)
-            self.present(activityApplicationsView, animated: true)
-            activityApplicationsView.completionWithItemsHandler = { _, _,_,_ in
-                UIView.animate(withDuration: 0.2) {
-                    self.loadView()
-                    self.starterLayout()
-                }
-                
-                
-                
-                
-            }
-        }
-        
-    }
-    func convertToImage() -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(layoutContainer.bounds.size, true, 0)
-        layoutContainer.drawHierarchy(in: layoutContainer.bounds, afterScreenUpdates: true)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image
     }
 }
 

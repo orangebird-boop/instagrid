@@ -1,9 +1,4 @@
-//
-//  RightLayoutView.swift
-//  P4_01_Xcode
-//
-//  Created by Nora Lilla Matyassi on 20/08/2021.
-//
+
 
 import UIKit
 
@@ -30,7 +25,7 @@ class RightLayoutView: UIView {
         backgroundColor = UIColor(red: 15/255, green: 102/255, blue: 152/255, alpha: 1)
         
         
-       
+        
         
         
         rightTopImageButton.setImage(UIImage(named: "Plus.png"), for: .normal)
@@ -75,8 +70,8 @@ class RightLayoutView: UIView {
         [rightTopImageButton, leftTopImageButton, rightBottomImageButton, leftBottomImageButton].forEach { $0.translatesAutoresizingMaskIntoConstraints = false }
         
         NSLayoutConstraint.activate([
-    
- 
+            
+            
             rightTopImageButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             rightTopImageButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
             rightTopImageButton.heightAnchor.constraint(equalToConstant: 145),
