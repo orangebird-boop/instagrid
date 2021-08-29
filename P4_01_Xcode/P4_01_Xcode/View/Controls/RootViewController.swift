@@ -70,11 +70,7 @@ class RootViewController: UIViewController {
         view.addSubview(swipeLabel)
         swipeLabel.sizeToFit()
         
-        let swipeGestureRecognizerUp = UISwipeGestureRecognizer(target: self, action: #selector(userDidSwipe))
-        swipeGestureRecognizerUp.direction = .up
-        self.layoutContainer.addGestureRecognizer(swipeGestureRecognizerUp)
-        
-        
+       
         
         print("is this happening?")
         layoutSelectionView.leftLayoutButton.addTarget(self, action: #selector(userDidTap), for: .touchUpInside)
@@ -199,20 +195,34 @@ class RootViewController: UIViewController {
      }
      }
      
+     
+     
      */
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         
      //   constraints()
         super.viewWillTransition(to: size, with: coordinator)
-        if UIDevice.current.orientation.isLandscape {
+        
+        if UIDevice.current.orientation.isLandscape  {
+            
             print("Landscape")
+            
+            let swipeGestureRecognizerUp = UISwipeGestureRecognizer(target: self, action: #selector(userDidSwipe))
+            swipeGestureRecognizerUp.direction = .up
+            
+            self.layoutContainer.addGestureRecognizer(swipeGestureRecognizerUp)
             swipeLabel.text = "< \nSwipe left to share"
             NSLayoutConstraint.deactivate(portrait)
             NSLayoutConstraint.activate(landscape)
-        } else {
-            print("Portrait")
             
+        } else if UIDevice.current.orientation.isPortrait {
+            
+            print("Portrait")
+            let swipeGestureRecognizerLeft = UISwipeGestureRecognizer(target: self, action: #selector(userDidSwipe))
+            swipeGestureRecognizerLeft.direction = .left
+            
+            self.layoutContainer.addGestureRecognizer(swipeGestureRecognizerLeft)
             swipeLabel.text = "^ \nSwipe up to share"
             swipeLabel.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: delmMedium)
             NSLayoutConstraint.deactivate(landscape)
@@ -245,6 +255,31 @@ class RootViewController: UIViewController {
             layoutView.leftAnchor.constraint(equalTo: layoutContainer.leftAnchor),
             
         ])
+    
+        /*
+        if UIDevice.current.orientation.isPortrait {
+            print("this is starter portrait")
+            NSLayoutConstraint.deactivate(landscape)
+            NSLayoutConstraint.activate(portrait)
+           
+            
+        } else if UIDevice.current.orientation.isPortrait {
+            print("this is starter landscape")
+            NSLayoutConstraint.deactivate(portrait)
+            NSLayoutConstraint.activate(landscape)
+         
+             */
+            
+        
+            /*
+        NSLayoutConstraint.activate([
+            layoutView.topAnchor.constraint(equalTo: layoutContainer.topAnchor),
+            layoutView.rightAnchor.constraint(equalTo: layoutContainer.rightAnchor),
+            layoutView.bottomAnchor.constraint(equalTo: layoutContainer.bottomAnchor),
+            layoutView.leftAnchor.constraint(equalTo: layoutContainer.leftAnchor),
+            
+        ])
+ */
     }
     
     
@@ -372,22 +407,7 @@ extension RootViewController: UIImagePickerControllerDelegate, UINavigationContr
         
         picker.dismiss(animated: true, completion: nil)
     }
-    /*
-    // Manage swipe direction depending on screen orientation
-    @objc func whichSwipe(_ sender: UISwipeGestureRecognizer) {
-        if sender.direction == .up && UIScreen.main.bounds.size.height > UIScreen.main.bounds.size.width {
-            CentralView.animate(withDuration: 1) {
-            self.centralView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.height)
-            }
-            self.shareCentralView()
-        } else if sender.direction == .left &&  UIScreen.main.bounds.size.height < UIScreen.main.bounds.size.width {
-            CentralView.animate(withDuration: 1) {
-            self.centralView.transform = CGAffineTransform(translationX: -self.view.frame.width, y: 0)
-            }
-            self.shareCentralView()
-        }
-    }
-    */
+   
     @objc func userDidSwipe(_ sender: UISwipeGestureRecognizer) {
         var frame = layoutContainer.frame
         
@@ -397,9 +417,14 @@ extension RootViewController: UIImagePickerControllerDelegate, UINavigationContr
                 self.layoutContainer.frame = frame
                 self.shareImage()
             }
+        } else if sender.direction == .left {
+            frame.origin.x -= 1000.0
+            UIView.animate(withDuration: 1) {
+               self.layoutContainer.frame = frame
+                self.shareImage()
         }
     }
-    
+    }
     
     func shareImage() {
         print("share image")
