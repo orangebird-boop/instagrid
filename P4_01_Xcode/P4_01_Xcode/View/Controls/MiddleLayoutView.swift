@@ -25,7 +25,7 @@ class MiddleLayoutView: UIView {
         
         bottomImageButton.setImage(UIImage(named: "Plus.png"), for: .normal)
         bottomImageButton.backgroundColor = .white
-        bottomImageButton.imageEdgeInsets = UIEdgeInsets(top: 45, left: 180, bottom: 45, right: 180)
+        bottomImageButton.imageEdgeInsets = UIEdgeInsets(top: 45, left: 125, bottom: 45, right: 125)
         bottomImageButton.contentVerticalAlignment = .fill
         bottomImageButton.contentHorizontalAlignment = .fill
         

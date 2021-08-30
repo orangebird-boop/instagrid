@@ -27,7 +27,7 @@ class LeftLayoutView: UIView {
         
         topImageButton.setImage(UIImage(named: "Plus.png"), for: .normal)
         topImageButton.backgroundColor = .white
-        topImageButton.imageEdgeInsets = UIEdgeInsets(top: 45, left: 180, bottom: 45, right: 180)
+        topImageButton.imageEdgeInsets = UIEdgeInsets(top: 45, left: 125, bottom: 45, right: 125)
         topImageButton.contentVerticalAlignment = .fill
         topImageButton.contentHorizontalAlignment = .fill
         
