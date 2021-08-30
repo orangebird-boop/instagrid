@@ -54,18 +54,18 @@ class MiddleLayoutView: UIView {
             
             rightTopImageButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             rightTopImageButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
-            rightTopImageButton.heightAnchor.constraint(equalToConstant: 145),
-            rightTopImageButton.widthAnchor.constraint(equalToConstant: 145),
+            rightTopImageButton.heightAnchor.constraint(equalTo: bottomImageButton.heightAnchor),
+            rightTopImageButton.widthAnchor.constraint(equalTo: bottomImageButton.heightAnchor),
             
             leftTopImageButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             leftTopImageButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            leftTopImageButton.heightAnchor.constraint(equalToConstant: 145),
-            leftTopImageButton.widthAnchor.constraint(equalToConstant: 145),
+            leftTopImageButton.heightAnchor.constraint(equalTo: bottomImageButton.heightAnchor),
+            leftTopImageButton.widthAnchor.constraint(equalTo: bottomImageButton.heightAnchor),
             
             bottomImageButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             bottomImageButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            bottomImageButton.heightAnchor.constraint(equalToConstant: 145),
-            bottomImageButton.widthAnchor.constraint(equalToConstant: 300),
+            bottomImageButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
+            bottomImageButton.topAnchor.constraint(equalTo: leftTopImageButton.bottomAnchor, constant: 10)
             
         ])
         

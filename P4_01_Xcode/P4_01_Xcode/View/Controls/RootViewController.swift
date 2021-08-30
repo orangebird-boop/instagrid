@@ -96,14 +96,14 @@ class RootViewController: UIViewController {
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             
-            
-            layoutContainer.heightAnchor.constraint(equalToConstant: 320),
-            layoutContainer.widthAnchor.constraint(equalTo: layoutContainer.heightAnchor),
+            layoutContainer.widthAnchor.constraint(equalToConstant: view.bounds.width / 1.2),
+            layoutContainer.heightAnchor.constraint(equalTo: layoutContainer.widthAnchor),
             layoutContainer.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
             layoutContainer.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
             
             swipeLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            swipeLabel.widthAnchor.constraint(equalTo: layoutContainer.widthAnchor),
             swipeLabel.bottomAnchor.constraint(equalTo: layoutContainer.topAnchor, constant: -20),
             
             layoutSelectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -32),
@@ -111,20 +111,20 @@ class RootViewController: UIViewController {
             layoutSelectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
             layoutSelectionView.middleLayoutButton.bottomAnchor.constraint(equalTo:layoutSelectionView.bottomAnchor),
             layoutSelectionView.middleLayoutButton.centerXAnchor.constraint(equalTo: layoutSelectionView.centerXAnchor),
-            layoutSelectionView.middleLayoutButton.widthAnchor.constraint(equalToConstant: 64),
-            layoutSelectionView.middleLayoutButton.heightAnchor.constraint(equalToConstant: 64),
+          //  layoutSelectionView.middleLayoutButton.widthAnchor.constraint(equalToConstant: 64),
+           // layoutSelectionView.middleLayoutButton.heightAnchor.constraint(equalToConstant: 64),
             
             layoutSelectionView.leftLayoutButton.bottomAnchor.constraint(equalTo: layoutSelectionView.safeAreaLayoutGuide.bottomAnchor),
             layoutSelectionView.leftLayoutButton.rightAnchor.constraint(equalTo: layoutSelectionView.middleLayoutButton.leftAnchor, constant: -32),
-            layoutSelectionView.leftLayoutButton.widthAnchor.constraint(equalToConstant: 64),
-            layoutSelectionView.leftLayoutButton.heightAnchor.constraint(equalToConstant: 64),
+        //    layoutSelectionView.leftLayoutButton.widthAnchor.constraint(equalToConstant: 64),
+         //   layoutSelectionView.leftLayoutButton.heightAnchor.constraint(equalToConstant: 64),
             
             
             
             layoutSelectionView.rightLayoutButton.bottomAnchor.constraint(equalTo: layoutSelectionView.safeAreaLayoutGuide.bottomAnchor),
             layoutSelectionView.rightLayoutButton.leftAnchor.constraint(equalTo: layoutSelectionView.middleLayoutButton.rightAnchor, constant: 32),
-            layoutSelectionView.rightLayoutButton.widthAnchor.constraint(equalToConstant: 64),
-            layoutSelectionView.rightLayoutButton.heightAnchor.constraint(equalToConstant: 64),
+           // layoutSelectionView.rightLayoutButton.widthAnchor.constraint(equalToConstant: 64),
+          //  layoutSelectionView.rightLayoutButton.heightAnchor.constraint(equalToConstant: 64),
             
             
         ]
@@ -136,14 +136,15 @@ class RootViewController: UIViewController {
             
             
             
-            layoutContainer.heightAnchor.constraint(equalToConstant: 320),
-            layoutContainer.widthAnchor.constraint(equalTo: layoutContainer.heightAnchor),
-             layoutContainer.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: -120),
+            layoutContainer.widthAnchor.constraint(equalToConstant: view.bounds.width / 1.2),
+            layoutContainer.heightAnchor.constraint(equalTo: layoutContainer.widthAnchor),
             layoutContainer.bottomAnchor.constraint(lessThanOrEqualTo: view.bottomAnchor, constant: -10),
+            layoutContainer.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: -120),
      
             
-            swipeLabel.leftAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.centerXAnchor, constant: -350),
+            swipeLabel.rightAnchor.constraint(equalTo: layoutContainer.leftAnchor, constant: -20),
             swipeLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+        //    swipeLabel.widthAnchor.constraint(equalToConstant: layoutContainer.bounds.width / 1.5),
             
            
             layoutSelectionView.middleLayoutButton.centerYAnchor.constraint(equalTo: layoutContainer.centerYAnchor),
@@ -167,7 +168,7 @@ class RootViewController: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
         if UIDevice.current.orientation.isLandscape {
             activateSwipe(orientation: "landscape")
-        }else if UIDevice.current.orientation.isPortrait {
+        }else  {  //UIDevice.current.orientation.isPortrait 
             activateSwipe(orientation: "portrait")
         }
      

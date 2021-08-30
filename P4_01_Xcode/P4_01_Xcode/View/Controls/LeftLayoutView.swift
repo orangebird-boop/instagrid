@@ -59,18 +59,21 @@ class LeftLayoutView: UIView {
             
             rightBottomImageButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             rightBottomImageButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
-            rightBottomImageButton.heightAnchor.constraint(equalToConstant: 145),
-            rightBottomImageButton.widthAnchor.constraint(equalToConstant: 145),
+            rightBottomImageButton.heightAnchor.constraint(equalTo: topImageButton.heightAnchor),
+            rightBottomImageButton.widthAnchor.constraint(equalTo: topImageButton.heightAnchor),
             
             leftBottomImageButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             leftBottomImageButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            leftBottomImageButton.heightAnchor.constraint(equalToConstant: 145),
-            leftBottomImageButton.widthAnchor.constraint(equalToConstant: 145),
+            leftBottomImageButton.heightAnchor.constraint(equalTo: topImageButton.heightAnchor),
+            leftBottomImageButton.widthAnchor.constraint(equalTo: topImageButton.heightAnchor),
             
             topImageButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             topImageButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
-            topImageButton.heightAnchor.constraint(equalToConstant: 145),
-            topImageButton.widthAnchor.constraint(equalToConstant: 300),
+            topImageButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -10),
+            topImageButton.bottomAnchor.constraint(equalTo: leftBottomImageButton.topAnchor, constant: -10)
+         //   topImageButton.centerYAnchor.constraint(equalTo: layoutContainer.centerYAnchor),
+          //  topImageButton.heightAnchor.constraint(equalToConstant: 145),
+          //  topImageButton.widthAnchor.constraint(equalToConstant: 300),
             
         ])
         
