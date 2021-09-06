@@ -34,6 +34,13 @@ final class RootViewController: UIViewController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(deviceOrientationHasChanged), name: UIDevice.orientationDidChangeNotification, object: nil)
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    
+        layoutSelectionView.firstLayoutButton.isSelected = true
+        userDidTapOnLayoutButton(index: 1)
+    }
 
     deinit {
         NotificationCenter.default.removeObserver(self)
