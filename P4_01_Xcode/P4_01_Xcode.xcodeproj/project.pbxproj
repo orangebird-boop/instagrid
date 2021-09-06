@@ -17,6 +17,8 @@
 		27E5F57126B9672A0080204B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E5F57026B9672A0080204B /* AppDelegate.swift */; };
 		27E5F57A26B9672C0080204B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27E5F57926B9672C0080204B /* Assets.xcassets */; };
 		27E5F57D26B9672C0080204B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27E5F57B26B9672C0080204B /* LaunchScreen.storyboard */; };
+		ED08A58426DF774F00A00D57 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED08A58326DF774F00A00D57 /* Constants.swift */; };
+		ED08A58626DF7EBE00A00D57 /* LayoutContainerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED08A58526DF7EBE00A00D57 /* LayoutContainerButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		27E5F57926B9672C0080204B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27E5F57C26B9672C0080204B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		27E5F57E26B9672C0080204B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED08A58326DF774F00A00D57 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		ED08A58526DF7EBE00A00D57 /* LayoutContainerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutContainerButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,26 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2775BE4626BC0CA500E8DE8A /* View */ = {
+		2775BE4626BC0CA500E8DE8A /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				2775BE4B26BC0EF400E8DE8A /* Controls */,
+				27E5F57B26B9672C0080204B /* LaunchScreen.storyboard */,
+				2775BE5C26BC3AD100E8DE8A /* RootViewController.swift */,
 			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		2775BE4726BC0CC900E8DE8A /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		2775BE4826BC0E6E00E8DE8A /* Configuration */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Configuration;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		2775BE4926BC0E9E00E8DE8A /* Resources */ = {
@@ -81,6 +73,8 @@
 			isa = PBXGroup;
 			children = (
 				27E5F57026B9672A0080204B /* AppDelegate.swift */,
+				2775BE4626BC0CA500E8DE8A /* Views */,
+				ED08A58326DF774F00A00D57 /* Constants.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -88,12 +82,11 @@
 		2775BE4B26BC0EF400E8DE8A /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				27E5F57B26B9672C0080204B /* LaunchScreen.storyboard */,
 				2775BE5826BC274D00E8DE8A /* LayoutSelectionView.swift */,
-				2775BE5C26BC3AD100E8DE8A /* RootViewController.swift */,
-				2755F52626CFC52E007CC759 /* RightLayoutView.swift */,
 				2755F52426CFC036007CC759 /* LeftLayoutView.swift */,
 				2755F52226CFBDD8007CC759 /* MiddleLayoutView.swift */,
+				2755F52626CFC52E007CC759 /* RightLayoutView.swift */,
+				ED08A58526DF7EBE00A00D57 /* LayoutContainerButton.swift */,
 			);
 			path = Controls;
 			sourceTree = "<group>";
@@ -101,10 +94,10 @@
 		27E5F56426B9672A0080204B = {
 			isa = PBXGroup;
 			children = (
-				2775BE4A26BC0EBD00E8DE8A /* Sources */,
-				2775BE4926BC0E9E00E8DE8A /* Resources */,
+				27E5F56F26B9672A0080204B /* Configurations */,
 				27E5F56E26B9672A0080204B /* Products */,
-				27E5F56F26B9672A0080204B /* P4_01_Xcode */,
+				2775BE4926BC0E9E00E8DE8A /* Resources */,
+				2775BE4A26BC0EBD00E8DE8A /* Sources */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,15 +109,12 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		27E5F56F26B9672A0080204B /* P4_01_Xcode */ = {
+		27E5F56F26B9672A0080204B /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
 				27E5F57E26B9672C0080204B /* Info.plist */,
-				2775BE4826BC0E6E00E8DE8A /* Configuration */,
-				2775BE4726BC0CC900E8DE8A /* Controller */,
-				2775BE4626BC0CA500E8DE8A /* View */,
 			);
-			path = P4_01_Xcode;
+			path = Configurations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,7 +191,9 @@
 				2755F52326CFBDD8007CC759 /* MiddleLayoutView.swift in Sources */,
 				2755F52526CFC036007CC759 /* LeftLayoutView.swift in Sources */,
 				27E5F57126B9672A0080204B /* AppDelegate.swift in Sources */,
+				ED08A58626DF7EBE00A00D57 /* LayoutContainerButton.swift in Sources */,
 				2755F52726CFC52E007CC759 /* RightLayoutView.swift in Sources */,
+				ED08A58426DF774F00A00D57 /* Constants.swift in Sources */,
 				2775BE5D26BC3AD100E8DE8A /* RootViewController.swift in Sources */,
 				2775BE5926BC274D00E8DE8A /* LayoutSelectionView.swift in Sources */,
 			);
@@ -346,7 +338,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U56C9Q3FLL;
-				INFOPLIST_FILE = P4_01_Xcode/Info.plist;
+				INFOPLIST_FILE = Configurations/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -365,7 +357,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U56C9Q3FLL;
-				INFOPLIST_FILE = P4_01_Xcode/Info.plist;
+				INFOPLIST_FILE = Configurations/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
