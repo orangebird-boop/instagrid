@@ -1,4 +1,5 @@
 import UIKit
+import AVFoundation
 
 final class RootViewController: UIViewController {
     
@@ -20,6 +21,7 @@ final class RootViewController: UIViewController {
     var lastTappedButton: LayoutContainerButton?
 
     let imagePicker = UIImagePickerController()
+    
 
     var layoutConstraints = [NSLayoutConstraint]()
     
@@ -211,15 +213,61 @@ final class RootViewController: UIViewController {
             }
         }
     }
-
-    @objc func pickImage(_ sender: AnyObject) {
-        present(imagePicker, animated: true, completion: nil)
+    
+    @objc func pickImage(_ sender: AnyObject){
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+             alert.addAction(UIAlertAction(title: "Take Photo", style: .default, handler: { _ in
+                 self.openCamera()
+             }))
+             
+             alert.addAction(UIAlertAction(title: "Choose Photo", style: .default, handler: { _ in
+                self.openPhotoLibrary(sender)
+             }))
+             
+             alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         
+        self.present(alert, animated: true, completion: nil)
+    }
+
+     func openPhotoLibrary(_ sender: AnyObject) {
+        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+               //If you dont want to edit the photo then you can set allowsEditing to false
+               imagePicker.allowsEditing = false
+               imagePicker.delegate = self
+               self.present(imagePicker, animated: true, completion: nil)
+        
+        present(imagePicker, animated: true, completion: nil)
+     
         if let tappedImageButton = sender as? LayoutContainerButton {
             lastTappedButton = tappedImageButton
         }
+ 
     }
+    
+    func openCamera(){
+        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera)){
+            imagePicker.sourceType = UIImagePickerController.SourceType.camera
+                //If you dont want to edit the photo then you can set allowsEditing to false
+                imagePicker.allowsEditing = true
+                imagePicker.delegate = self
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+            else{
+                let alert  = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    /*
+    @objc func showAlert(){
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let cameraAction = UIAlertAction(title: "Take Photo", style: .default, handler: nil)
+        let photoLibraryAction = UIAlertAction(title: "Choose Existing", style: .default, handler: nil)
 
+        actionSheet.addAction(cameraAction)
+        actionSheet.addAction(photoLibraryAction)
+    }
+*/
     @objc func userDidSwipe(_ sender: UISwipeGestureRecognizer) {
         var frame = layoutContainer.frame
         
