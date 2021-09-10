@@ -112,8 +112,8 @@ final class RootViewController: UIViewController {
                 layoutContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor),
                 layoutContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
-                swipeLabel.rightAnchor.constraint(equalTo: layoutContainer.leftAnchor, constant: -Constants.Margins.medium),
-                swipeLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: -Constants.Margins.medium),
+                swipeLabel.rightAnchor.constraint(equalTo: layoutContainer.leftAnchor, constant: -Constants.Margins.small),
+                swipeLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: -Constants.Margins.large),
                 swipeLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 
                 layoutSelectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.Margins.small),

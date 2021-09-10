@@ -17,5 +17,8 @@ public struct Constants {
 
         /// 16
         static let medium: CGFloat = 16
+        
+        /// 22
+        static let large: CGFloat = 22
     }
 }
